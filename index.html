@@ -575,8 +575,13 @@
         const note = document.getElementById(formId + '-success').nextElementSibling;
         if (note && note.classList.contains('form-note')) note.style.opacity = '0';
       } else {
-        const json = await res.json();
-        const msg  = json?.errors?.map(e => e.message).join(', ') || 'Something went wrong. Please try again.';
+        let msg = `Error ${res.status}`;
+        try {
+          const json = await res.json();
+          if (json?.errors?.length) msg = json.errors.map(e => e.message || e.field).join(', ');
+          else if (json?.error)      msg = json.error;
+          else                       msg = JSON.stringify(json);
+        } catch {}
         btn.textContent = originalText;
         btn.disabled = false;
         alert(msg);
