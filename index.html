@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sous Pantry — Cook smarter, waste less</title>
   <meta name="description" content="Sous Pantry turns your fridge and pantry into personalised recipes. Zero waste. Zero stress. Join the waitlist." />
+  <link rel="icon" type="image/png" href="icon.png" />
+  <link rel="apple-touch-icon" href="icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -50,9 +52,12 @@
     }
     .nav-logo-icon {
       width: 34px; height: 34px; border-radius: 10px;
-      background: var(--green);
+      overflow: hidden;
       display: flex; align-items: center; justify-content: center;
-      font-size: 18px;
+    }
+    .nav-logo-icon img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
     }
     .nav-cta {
       background: var(--green); color: #fff;
@@ -353,7 +358,7 @@
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="#">
-    <div class="nav-logo-icon">🥬</div>
+    <div class="nav-logo-icon"><img src="icon.png" alt="Sous Pantry" /></div>
     Sous Pantry
   </a>
   <a class="nav-cta" href="#waitlist">Join waitlist</a>
