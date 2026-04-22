@@ -15,7 +15,7 @@ git init
 git add .
 git commit -m "Initial landing page commit"
 git branch -M main
-git remote add origin https://github.com/jamesianfoo-sp/sous_pantry_launch.git
+git remote add origin https://github.com/jamesianfoo/Sous-Pantry-Site.git
 git push -u origin main
 ```
 
@@ -23,7 +23,7 @@ git push -u origin main
 
 ## 2. Enable GitHub Pages
 
-1. Go to your repo: https://github.com/jamesianfoo-sp/sous_pantry_launch
+1. Go to your repo: https://github.com/jamesianfoo/Sous-Pantry-Site
 2. Click **Settings** (top right)
 3. Scroll down to **Pages** (left sidebar)
 4. Under "Build and deployment":
