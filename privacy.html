@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Sous Pantry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --cream: #f5f1ed;
+      --navy: #1a1f3a;
+      --green: #4a7c59;
+      --text-dark: #1a1f3a;
+      --text-muted: #666;
+      --border-light: #e5e0db;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: rgba(245, 241, 237, 0.95);
+      border-bottom: 1px solid var(--border-light);
+      padding: 1.25rem 2rem;
+    }
+    
+    nav .inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    nav .logo {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--navy);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      letter-spacing: -0.01em;
+      transition: opacity 0.2s;
+    }
+    
+    nav .logo:hover { opacity: 0.7; }
+    nav .logo span { font-size: 1.3rem; }
+    
+    nav .back {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      font-weight: 500;
+    }
+    
+    nav .back:hover { color: var(--green); }
+
+    /* CONTENT */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4rem 2rem 5rem;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    
+    .effective {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      font-weight: 500;
+    }
+
+    > p:first-of-type {
+      font-size: 1.05rem;
+      margin-bottom: 3rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    p {
+      margin-bottom: 1.25rem;
+      color: var(--text-dark);
+      line-height: 1.8;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-top: 3.5rem;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.01em;
+    }
+
+    h2:first-of-type {
+      margin-top: 2rem;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 1.5rem;
+    }
+    
+    ul li {
+      position: relative;
+      padding-left: 1.75rem;
+      margin-bottom: 0.85rem;
+      color: var(--text-dark);
+      line-height: 1.7;
+    }
+    
+    ul li::before {
+      content: '';
+      position: absolute;
+      left: 0.4rem;
+      top: 0.7em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    strong {
+      color: var(--navy);
+      font-weight: 600;
+    }
+
+    a {
+      color: var(--green);
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+    
+    a:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border-light);
+      margin: 4rem 0 3rem;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-light);
+      background: white;
+    }
+    
+    footer a {
+      margin: 0 0.25rem;
+    }
+
+    @media (max-width: 640px) {
+      nav .inner {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      main {
+        padding: 3rem 1.5rem 4rem;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      h2 {
+        font-size: 1.3rem;
+        margin-top: 3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="inner">
+      <a href="https://souspantry.com" class="logo"><span>📦</span> Sous Pantry</a>
+      <a href="https://souspantry.com" class="back">← Back to home</a>
+    </div>
+  </nav>
+
+  <main>
+    <h1>Privacy Policy</h1>
+    <p class="effective">Last updated: April 22, 2026</p>
+
+    <p>We're committed to protecting your privacy. This policy explains what information we collect, how we use it, and your rights. Your data is yours—we're just here to help you cook smarter.</p>
+
+    <h2>1. Definitions and Key Terms</h2>
+    <p>To help explain this policy clearly:</p>
+    <ul>
+      <li><strong>Personal Data:</strong> any information that directly or indirectly allows for the identification of a person, including email address, name, device information, or usage data</li>
+      <li><strong>Service:</strong> the Sous Pantry mobile app and website</li>
+      <li><strong>Device:</strong> any internet-connected device (phone, tablet, computer) used to access Sous Pantry</li>
+      <li><strong>Third-party service:</strong> partners who provide AI, analytics, payment processing, or other services</li>
+    </ul>
+
+    <h2>2. Information We Collect</h2>
+    <p><strong>Information you provide directly:</strong></p>
+    <ul>
+      <li>Account details — email address, display name, and password</li>
+      <li>Pantry &amp; recipe data — ingredients, quantities, meal plans, dietary preferences, and saved recipes</li>
+      <li>Photos — pantry photos, receipt images, or food photos you upload</li>
+    </ul>
+    <p><strong>Information collected automatically:</strong></p>
+    <ul>
+      <li>Device information — device type, operating system, app version, and unique identifiers</li>
+      <li>Usage data — features accessed, session duration, pages viewed, and interaction patterns</li>
+      <li>Crash &amp; diagnostic logs — error reports to help us improve reliability</li>
+      <li>Location data (optional) — if you grant permission, your approximate location</li>
+      <li>Camera &amp; photo gallery access (optional) — if you grant permission for photo uploads</li>
+    </ul>
+
+    <h2>3. How We Use Your Information</h2>
+    <p>We use your information to:</p>
+    <ul>
+      <li>Provide and personalise the Sous Pantry experience</li>
+      <li>Generate AI-powered recipe suggestions based on your pantry contents</li>
+      <li>Process transactions and manage your subscription</li>
+      <li>Improve app performance, fix bugs, and add new features</li>
+      <li>Send important service updates and notifications</li>
+      <li>Respond to support requests and feedback</li>
+      <li>Detect and prevent fraud or misuse</li>
+    </ul>
+
+    <h2>4. AI &amp; Third-Party Services</h2>
+    <p>Sous Pantry uses third-party AI services (such as Anthropic's API) to generate recipe suggestions and analyse pantry photos. When you request a recipe or upload a photo:</p>
+    <ul>
+      <li>Your ingredient list or image is sent to the AI service to generate personalised results</li>
+      <li>Your personal identity (name, email, account details) is not shared with these services</li>
+      <li>Data is not used to train or improve AI models</li>
+      <li>Results are returned to your device and processed within Sous Pantry</li>
+    </ul>
+    <p>We also use third parties for analytics, crash reporting, and payment processing. These partners are bound by confidentiality agreements.</p>
+
+    <h2>5. Data Storage &amp; Security</h2>
+    <p>Your data is stored securely using industry-standard encryption in transit and at rest. We retain your information only for as long as your account is active or as needed to provide our services. If you delete your account, we will remove your data from our systems within 30 days.</p>
+
+    <h2>6. Your Rights &amp; Choices</h2>
+    <p>You have the right to:</p>
+    <ul>
+      <li>Access all personal data we hold about you</li>
+      <li>Correct or update inaccurate information</li>
+      <li>Delete your account and associated data</li>
+      <li>Deny optional permissions (location, camera, contacts)</li>
+      <li>Opt out of non-essential communications</li>
+    </ul>
+    <p>To exercise these rights, contact us at <a href="mailto:hello@souspantry.com">hello@souspantry.com</a></p>
+
+    <h2>7. Children's Privacy</h2>
+    <p>Sous Pantry is not directed at children under 13. We do not knowingly collect personal information from children. If we become aware that a child has provided us with personal data, we will delete it immediately.</p>
+
+    <h2>8. Do We Share Your Information with Third Parties?</h2>
+    <p>We share your information with trusted third parties who help us provide Sous Pantry. This includes:</p>
+    <ul>
+      <li><strong>Payment processors</strong> (RevenueCat) — to process subscriptions and handle billing</li>
+      <li><strong>AI providers</strong> (Anthropic) — to generate recipe suggestions and analyse photos</li>
+      <li><strong>Analytics partners</strong> — to understand app usage and improve features</li>
+      <li><strong>Crash reporting services</strong> — to diagnose and fix bugs</li>
+      <li><strong>Fraud detection services</strong> — to protect your account and payment information</li>
+    </ul>
+    <p>We require all third parties to keep your information confidential and use it only for the purposes we specify. We do not sell your personal data to marketers or advertisers.</p>
+
+    <h2>9. How We Use Your Email Address</h2>
+    <p>By providing your email, you agree to receive communications from us. We send:</p>
+    <ul>
+      <li>Account updates and password resets</li>
+      <li>Service announcements and important notices</li>
+      <li>Subscription-related information</li>
+    </ul>
+    <p>We do not send unsolicited commercial emails. You can unsubscribe from non-essential communications at any time by clicking the unsubscribe link in any email or contacting us directly.</p>
+
+    <h2>10. Could Your Information Be Transferred to Other Countries?</h2>
+    <p>Sous Pantry's servers and partners may be located in different countries. When you use Sous Pantry, your information may be transferred to, processed, and stored outside Australia, including countries without the same privacy laws as Australia. By using Sous Pantry, you consent to this international transfer of your data.</p>
+
+    <h2>11. How Do We Protect Your Information?</h2>
+    <p>We use industry-standard security measures to protect your data:</p>
+    <ul>
+      <li>Encryption in transit (SSL/TLS) and at rest</li>
+      <li>Secure servers with restricted access</li>
+      <li>Regular security audits and updates</li>
+      <li>Payment information is never stored on our servers</li>
+    </ul>
+    <p><strong>Security disclaimer:</strong> While we use reasonable security efforts, no system is completely foolproof. We cannot guarantee absolute security or that your information will never be accessed, altered, or destroyed by a breach of our safeguards. You are responsible for maintaining the secrecy of your password and account information.</p>
+
+    <h2>12. How Long Do We Keep Your Information?</h2>
+    <p>We retain your information only as long as needed to provide Sous Pantry and fulfil the purposes described in this policy. When we no longer need your data and you have no active account, we either remove it from our systems or anonymise it so you cannot be identified.</p>
+    <p><strong>Backup retention:</strong> For disaster recovery and data protection, we maintain backups of our systems. This means a copy of your information may exist in non-erasable backup form for a period of time. We will promptly remove or anonymise your data from active databases when you request deletion, but backups may take longer to fully purge.</p>
+
+    <h2>13. Can I Update or Correct My Information?</h2>
+    <p>Yes. You can request to:</p>
+    <ul>
+      <li>Access all personal data we hold about you</li>
+      <li>Correct or update inaccurate information</li>
+      <li>Delete your account and most associated data</li>
+      <li>Change your communication preferences</li>
+    </ul>
+    <p>To make these requests, contact us at <a href="mailto:hello@souspantry.com">hello@souspantry.com</a>. We may ask you to verify your identity for security. Please note that changes you request will apply to active data but may not affect information already shared with third parties prior to your request, or information we are required to keep for legal or regulatory reasons.</p>
+
+    <h2>14. Sale of Business</h2>
+    <p>If Sous Pantry is involved in a merger, acquisition, or sale of assets, we reserve the right to transfer your information to the acquiring company or successor. The successor company must agree to be bound by this Privacy Policy.</p>
+
+    <h2>15. GDPR — European Data Protection</h2>
+    <p>If you are located in the European Economic Area (EEA) or United Kingdom, we comply with the General Data Protection Regulation (GDPR). GDPR gives you additional rights over your personal data:</p>
+    <ul>
+      <li>Right to access — request a copy of your data</li>
+      <li>Right to rectify — correct inaccurate data</li>
+      <li>Right to erasure — request deletion of your data</li>
+      <li>Right to restrict processing — limit how we use your data</li>
+      <li>Right to data portability — receive your data in a portable format</li>
+      <li>Right to object — object to certain processing</li>
+    </ul>
+    <p>To exercise these rights, contact us at <a href="mailto:hello@souspantry.com">hello@souspantry.com</a>. We implement GDPR protections as our baseline standard for all users worldwide, regardless of location.</p>
+
+    <h2>16. Payment Details</h2>
+    <p>Sous Pantry uses RevenueCat to process subscription payments. We do not store your credit card or payment information on our servers. All payment processing is handled securely by RevenueCat in accordance with their Privacy Policy and PCI DSS compliance standards. Your payment details are encrypted and never accessible to Sous Pantry directly.</p>
+
+    <h2>17. Kids' Privacy</h2>
+    <p>Sous Pantry is not directed at children under 13. We do not knowingly collect personal information from anyone under 13. If you are a parent or guardian and believe your child has provided us with personal data, please contact us immediately at <a href="mailto:hello@souspantry.com">hello@souspantry.com</a>. If we become aware that we have collected data from someone under 13 without parental consent, we will delete that information promptly.</p>
+
+    <h2>18. Changes to This Privacy Policy</h2>
+    <p>We may update this Privacy Policy from time to time to reflect changes to our practices, technology, legal requirements, or other factors. When we make material changes, we will notify you through the app or via email to your registered email address. We will give you at least 30 days to review the changes before they take effect.</p>
+    <p>Your continued use of Sous Pantry after changes become effective constitutes your acceptance of the updated Privacy Policy. If you do not agree to the changes, you may delete your account before the changes take effect.</p>
+
+    <h2>19. Third-Party Services Disclaimer</h2>
+    <p>Sous Pantry integrates with third-party services including Anthropic (for AI), RevenueCat (for payments), and analytics providers. We are not responsible for the accuracy, completeness, security, or practices of these third-party services. Your use of these services is subject to their own privacy policies and terms of service.</p>
+    <p>We do not assume any liability for any issues arising from third-party services, including data breaches, service interruptions, or policy changes by these providers. We recommend reviewing their privacy policies independently.</p>
+
+    <h2>20. Governing Law</h2>
+    <p>This Privacy Policy is governed by the laws of Australia, without regard to conflicts of law. You consent to the jurisdiction of Australian courts for any disputes arising from this policy. If you are located outside Australia, your use of Sous Pantry may also be subject to other local, state, national, or international laws.</p>
+
+    <h2>21. Your Consent</h2>
+    <p>By using Sous Pantry, registering an account, or continuing to use our service after changes to this policy, you signify your acceptance of this Privacy Policy and agree to its terms. If you do not agree with this policy, please do not use Sous Pantry.</p>
+
+    <hr class="divider" />
+
+    <p style="text-align: center; margin-top: 3rem;"><strong>Questions about your privacy?</strong><br>Contact us at <a href="mailto:hello@souspantry.com">hello@souspantry.com</a></p>
+  </main>
+
+  <footer>
+    &copy; 2025 Sous Pantry &middot; <a href="https://souspantry.com">Home</a>
+  </footer>
+
+</body>
+</html>
