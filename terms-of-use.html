@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Use — Sous Pantry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --cream: #f5f1ed;
+      --navy: #1a1f3a;
+      --green: #4a7c59;
+      --text-dark: #1a1f3a;
+      --text-muted: #666;
+      --border-light: #e5e0db;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: rgba(245, 241, 237, 0.95);
+      border-bottom: 1px solid var(--border-light);
+      padding: 1.25rem 2rem;
+    }
+    
+    nav .inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    nav .logo {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--navy);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      letter-spacing: -0.01em;
+      transition: opacity 0.2s;
+    }
+    
+    nav .logo:hover { opacity: 0.7; }
+    nav .logo span { font-size: 1.3rem; }
+    
+    nav .back {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      font-weight: 500;
+    }
+    
+    nav .back:hover { color: var(--green); }
+
+    /* CONTENT */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4rem 2rem 5rem;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    
+    .effective {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      font-weight: 500;
+    }
+
+    > p:first-of-type {
+      font-size: 1.05rem;
+      margin-bottom: 3rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    p {
+      margin-bottom: 1.25rem;
+      color: var(--text-dark);
+      line-height: 1.8;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-top: 3.5rem;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.01em;
+    }
+
+    h2:first-of-type {
+      margin-top: 2rem;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 1.5rem;
+    }
+    
+    ul li {
+      position: relative;
+      padding-left: 1.75rem;
+      margin-bottom: 0.85rem;
+      color: var(--text-dark);
+      line-height: 1.7;
+    }
+    
+    ul li::before {
+      content: '';
+      position: absolute;
+      left: 0.4rem;
+      top: 0.7em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    strong {
+      color: var(--navy);
+      font-weight: 600;
+    }
+
+    a {
+      color: var(--green);
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+    
+    a:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border-light);
+      margin: 4rem 0 3rem;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-light);
+      background: white;
+    }
+    
+    footer a {
+      margin: 0 0.25rem;
+    }
+
+    @media (max-width: 640px) {
+      nav .inner {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      main {
+        padding: 3rem 1.5rem 4rem;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      h2 {
+        font-size: 1.3rem;
+        margin-top: 3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="inner">
+      <a href="https://souspantry.com" class="logo"><img src="./icon.png" alt="Sous Pantry" style="width: 32px; height: 32px; border-radius: 8px;"> Sous Pantry</a>
+      <a href="https://souspantry.com" class="back">← Back to home</a>
+    </div>
+  </nav>
+
+  <main>
+    <h1>Terms of Use</h1>
+    <p class="effective">Last updated: April 22, 2026</p>
+
+    <p>By downloading, installing, or using Sous Pantry ("the Service"), you agree to these Terms of Use. If you do not agree, do not use the app.</p>
+
+    <h2>1. Acceptance of Terms</h2>
+    <p>These Terms of Use ("Terms") govern your use of Sous Pantry, including our website, mobile app, and all associated services. By accessing or using the Service, you signify that you have read, understood, and agree to be bound by these Terms and our <a href="/privacy">Privacy Policy</a>.</p>
+
+    <h2>2. Service Description</h2>
+    <p>Sous Pantry is a mobile application designed to help you track your pantry contents, generate personalised recipes, and plan your weekly meals using AI-powered suggestions. The Service includes:</p>
+    <ul>
+      <li>Pantry tracking and inventory management</li>
+      <li>AI-generated recipe suggestions</li>
+      <li>Weekly meal planning tools</li>
+      <li>Shopping list generation</li>
+      <li>Recipe customisation and saving</li>
+      <li>Nutrition information (Pro tier)</li>
+      <li>Additional features as announced</li>
+    </ul>
+
+    <h2>3. User Eligibility</h2>
+    <p>You must be at least 13 years old to use Sous Pantry. If you are under 18, you represent that you have parental or guardian permission to use the Service. We do not knowingly collect data from users under 13.</p>
+
+    <h2>4. Account Creation and Responsibility</h2>
+    <p>To use Sous Pantry, you may create an account using your email address. You are responsible for:</p>
+    <ul>
+      <li>Keeping your password confidential and secure</li>
+      <li>Notifying us immediately of any unauthorised access</li>
+      <li>Maintaining accurate account information</li>
+      <li>All activity that occurs under your account</li>
+    </ul>
+    <p>We reserve the right to suspend or terminate accounts that violate these Terms or engage in abusive behaviour.</p>
+
+    <h2>5. Permitted Use</h2>
+    <p>You agree to use Sous Pantry only for lawful purposes. You may not:</p>
+    <ul>
+      <li>Reverse engineer, decompile, or attempt to access the app's source code</li>
+      <li>Use the Service to violate any laws or regulations</li>
+      <li>Harass, abuse, or threaten other users or staff</li>
+      <li>Spam, phish, or engage in fraudulent activity</li>
+      <li>Upload malware, viruses, or harmful content</li>
+      <li>Scrape data from the Service without permission</li>
+      <li>Attempt to gain unauthorised access to accounts or systems</li>
+      <li>Resell, redistribute, or commercially exploit the Service</li>
+    </ul>
+
+    <h2>6. Content and Intellectual Property</h2>
+    <h3>Our Content</h3>
+    <p>All content within Sous Pantry—including recipes, text, graphics, logos, and design—is owned by Sous Pantry or our partners and protected by copyright. You may not reproduce, modify, or distribute this content without express permission.</p>
+    
+    <h3>Your Content</h3>
+    <p>You retain ownership of any content you create or upload (pantry items, notes, photos). By using the Service, you grant us a limited, non-exclusive license to use your content to:</p>
+    <ul>
+      <li>Provide and improve the Service</li>
+      <li>Generate personalised recommendations</li>
+      <li>Backup and secure your data</li>
+      <li>Comply with legal obligations</li>
+    </ul>
+    <p>We do not share your personal content with third parties without your consent.</p>
+
+    <h2>7. Subscriptions and Payments</h2>
+    <h3>Subscription Tiers</h3>
+    <p>Sous Pantry offers three tiers:</p>
+    <ul>
+      <li><strong>Free:</strong> Basic pantry tracking and recipe access</li>
+      <li><strong>Monthly Pro:</strong> Recurring monthly subscription with all Pro features</li>
+      <li><strong>Annual Pro:</strong> Recurring annual subscription with all Pro features at a discounted rate</li>
+    </ul>
+
+    <h3>Billing and Renewal</h3>
+    <p>Subscriptions auto-renew unless cancelled. You will be charged according to your selected plan:</p>
+    <ul>
+      <li>Monthly Pro renews every 30 days</li>
+      <li>Annual Pro renews every 365 days</li>
+      <li>Charges occur on the same date each billing cycle</li>
+    </ul>
+    <p>All payments are processed through RevenueCat, a third-party payment processor. Your payment information is handled securely and is never stored on Sous Pantry's servers.</p>
+
+    <h3>Free Trial</h3>
+    <p>If you sign up for a free trial of Pro, your trial begins immediately. You will be charged only after the trial period ends, unless you cancel beforehand. Cancellation must occur before the trial ends to avoid charges.</p>
+
+    <h3>Cancellation</h3>
+    <p>You can cancel your subscription at any time through:</p>
+    <ul>
+      <li>In-app subscription settings</li>
+      <li>Your device's app store (Apple App Store or Google Play Store)</li>
+      <li>Contacting us at <a href="mailto:support@souspantry.com">support@souspantry.com</a></li>
+    </ul>
+    <p>Cancellation takes effect at the end of your current billing cycle. No refunds will be issued for partial billing periods.</p>
+
+    <h3>Refund Policy</h3>
+    <p>Refund requests are subject to the policies of the app store through which you purchased the subscription (Apple App Store or Google Play Store). We comply with their refund policies for any eligible requests within 14 days of purchase.</p>
+
+    <h2>8. Limitations of Liability</h2>
+    <p>To the fullest extent permitted by law, Sous Pantry shall not be liable for:</p>
+    <ul>
+      <li>Any indirect, incidental, special, or consequential damages</li>
+      <li>Loss of data, revenue, or profit</li>
+      <li>Interruption of service or temporary outages</li>
+      <li>Errors or inaccuracies in recipe suggestions or nutrition information</li>
+      <li>Actions or omissions of third-party services (AI providers, payment processors, etc.)</li>
+      <li>Food safety issues or health outcomes related to recipes</li>
+    </ul>
+    <p>Our total liability for any claim shall not exceed the amount you paid for a subscription in the past 12 months, or $100 AUD, whichever is lower.</p>
+
+    <h2>9. Warranty Disclaimers</h2>
+    <p>The Service is provided "as is" and "as available." Sous Pantry makes no warranties that:</p>
+    <ul>
+      <li>The Service will be uninterrupted, error-free, or secure</li>
+      <li>Recipe suggestions will meet your tastes or dietary needs</li>
+      <li>Nutrition information is 100% accurate</li>
+      <li>The Service will be compatible with all devices or future OS updates</li>
+    </ul>
+    <p>Recipes and nutritional information are generated by AI and should be reviewed for accuracy. Always verify ingredient availability and dietary compatibility before cooking. Sous Pantry is not liable for food safety issues or health outcomes.</p>
+
+    <h2>10. AI-Generated Content</h2>
+    <p>Sous Pantry uses artificial intelligence to generate recipes and suggestions. AI-generated content:</p>
+    <ul>
+      <li>May contain errors or inaccuracies</li>
+      <li>Should be reviewed before use</li>
+      <li>Is not guaranteed to match your taste or dietary preferences</li>
+      <li>Is for informational purposes only</li>
+    </ul>
+    <p>You use AI-generated recipes at your own risk. Always verify ingredients are available and appropriate for your dietary needs before cooking.</p>
+
+    <h2>11. Third-Party Services</h2>
+    <p>Sous Pantry integrates with third-party services including Anthropic (AI), RevenueCat (payments), and analytics providers. These services are governed by their own terms and privacy policies. We are not responsible for their practices, security, or availability. Your use of these services is at your own risk.</p>
+
+    <h2>12. Termination</h2>
+    <p>We may suspend or terminate your account if you:</p>
+    <ul>
+      <li>Violate these Terms</li>
+      <li>Engage in illegal or abusive activity</li>
+      <li>Infringe intellectual property rights</li>
+      <li>Fail to pay subscription fees</li>
+      <li>Pose a security risk to the Service or other users</li>
+    </ul>
+    <p>Upon termination, you lose access to your account and any data stored within it. We may retain certain data for legal compliance purposes.</p>
+
+    <h2>13. Changes to the Service</h2>
+    <p>We reserve the right to modify, update, or discontinue features or the entire Service at any time. We will notify you of material changes through the app or email. Continued use constitutes acceptance of changes. If you disagree with significant changes, you may cancel your subscription.</p>
+
+    <h2>14. Data and Content Loss</h2>
+    <p>While we implement backup measures, we are not liable for loss of user data, pantry items, saved recipes, or meal plans due to:</p>
+    <ul>
+      <li>Device failure or deletion</li>
+      <li>Account deletion or termination</li>
+      <li>Software updates or OS incompatibility</li>
+      <li>Service outages or technical issues</li>
+    </ul>
+    <p>We recommend maintaining backups of important recipes or meal plans outside the app.</p>
+
+    <h2>15. Governing Law and Dispute Resolution</h2>
+    <p>These Terms are governed by the laws of Australia. You consent to the jurisdiction of Australian courts for any disputes. If you have a dispute with Sous Pantry, you agree to attempt resolution through email at <a href="mailto:support@souspantry.com">support@souspantry.com</a> before pursuing legal action.</p>
+
+    <h2>16. Severability</h2>
+    <p>If any provision of these Terms is found to be invalid or unenforceable, that provision will be modified to the minimum extent necessary to make it enforceable, and the remaining provisions will remain in effect.</p>
+
+    <h2>17. Entire Agreement</h2>
+    <p>These Terms, combined with our Privacy Policy, constitute the entire agreement between you and Sous Pantry regarding the Service and supersede any prior agreements or understandings.</p>
+
+    <h2>18. Contact Us</h2>
+    <p>If you have questions about these Terms, please contact us at:</p>
+    <ul>
+      <li>Email: <a href="mailto:support@souspantry.com">support@souspantry.com</a></li>
+      <li>Website: <a href="https://souspantry.com">souspantry.com</a></li>
+    </ul>
+
+    <hr class="divider" />
+
+    <p style="text-align: center; margin-top: 3rem; font-size: 0.95rem;">By using Sous Pantry, you acknowledge that you have read and agree to these Terms of Use.</p>
+  </main>
+
+  <footer>
+    &copy; 2025 Sous Pantry &middot; <a href="https://souspantry.com">Home</a>
+  </footer>
+
+</body>
+</html>
