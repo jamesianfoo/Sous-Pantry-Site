@@ -1,0 +1,1808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sous Pantry — Design System v1.1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ==========================================================
+     SOUS PANTRY — DESIGN TOKENS
+     Single source of truth for the doc itself + showcased tokens
+     ========================================================== */
+  :root {
+    /* Brand palette */
+    --sp-beige:        #EDE9DF;
+    --sp-cream:        #F7F3EC;
+    --sp-parchment:    #FAF6EE;
+    --sp-paper:        #FFFDF8;
+    --sp-navy:         #162437;
+    --sp-navy-deep:    #0F1A26;
+    --sp-navy-soft:    #2A3B4D;
+    --sp-forest:       #2D5A3D;
+    --sp-forest-deep:  #1E4029;
+    --sp-sage:         #8FA68E;
+    --sp-soft-mint:    #E3EDE6;
+    --sp-gold:         #C4965A;
+    --sp-clay:         #B85C38;
+
+    /* Neutrals */
+    --sp-ink:          #162437;
+    --sp-ink-2:        #647080;
+    --sp-ink-3:        #7B8794;
+    --sp-rule:         #D9D2C5;
+    --sp-rule-soft:    #E5DFD2;
+
+    /* Semantic */
+    --sp-success:      #2D5A3D;
+    --sp-warning:      #C76F3F;
+    --sp-danger:       #B23A48;
+    --sp-info:         #2C5F7C;
+
+    /* Type */
+    --font-display: 'Fraunces', 'Times New Roman', serif;
+    --font-ui:      'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+
+    /* Spacing scale (4pt base) */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --space-7: 48px;
+    --space-8: 64px;
+    --space-9: 96px;
+    --space-10: 128px;
+
+    /* Radius */
+    --r-sm: 8px;
+    --r-md: 12px;
+    --r-lg: 16px;
+    --r-xl: 24px;
+    --r-2xl: 32px;
+    --r-pill: 999px;
+
+    /* Elevation */
+    --shadow-1: 0 1px 2px rgba(22,36,55,0.05), 0 1px 1px rgba(22,36,55,0.04);
+    --shadow-2: 0 4px 12px rgba(22,36,55,0.06), 0 2px 4px rgba(22,36,55,0.04);
+    --shadow-3: 0 12px 32px rgba(22,36,55,0.10), 0 4px 8px rgba(22,36,55,0.05);
+    --shadow-4: 0 24px 64px rgba(22,36,55,0.16), 0 8px 16px rgba(22,36,55,0.06);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--sp-beige);
+    color: var(--sp-ink);
+    font-family: var(--font-ui);
+    font-size: 16px;
+    line-height: 1.55;
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Subtle paper grain on the background */
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.35;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.11 0 0 0 0 0.17 0 0 0 0 0.23 0 0 0 0.18 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    mix-blend-mode: multiply;
+  }
+
+  main { position: relative; z-index: 1; }
+
+  a { color: inherit; }
+
+  /* Layout shell */
+  .shell {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+  }
+  @media (max-width: 720px) { .shell { padding: 0 var(--space-4); } }
+
+  /* Section frame */
+  section {
+    padding: var(--space-9) 0;
+    border-top: 1px solid var(--sp-rule-soft);
+  }
+  section:first-of-type { border-top: 0; }
+
+  .section-meta {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-5);
+    margin-bottom: var(--space-7);
+  }
+  .section-num {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    color: var(--sp-ink-3);
+    flex-shrink: 0;
+  }
+  .section-num::before {
+    content: "";
+    display: inline-block;
+    width: 32px; height: 1px;
+    background: var(--sp-ink-3);
+    vertical-align: middle;
+    margin-right: 12px;
+    transform: translateY(-2px);
+  }
+  .section-kicker {
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--sp-forest);
+    margin: 0 0 var(--space-3);
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    color: var(--sp-navy);
+    margin: 0;
+    font-feature-settings: "ss01";
+  }
+  h1 {
+    font-weight: 400;
+    font-size: clamp(48px, 8vw, 112px);
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+  }
+  h2 {
+    font-weight: 400;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+  }
+  h2 em { font-style: italic; font-weight: 300; color: var(--sp-forest); }
+  h3 {
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: -0.005em;
+    color: var(--sp-navy);
+  }
+  h4 {
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--sp-ink-2);
+  }
+  p { margin: 0 0 var(--space-4); max-width: 62ch; color: var(--sp-ink-2); }
+  p.lede { font-size: 20px; line-height: 1.5; color: var(--sp-ink); max-width: 56ch; }
+  small, .small { font-size: 12px; color: var(--sp-ink-3); }
+
+  /* ==========================================================
+     COVER
+     ========================================================== */
+  .cover {
+    min-height: 86vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: var(--space-6) 0 var(--space-7);
+    position: relative;
+  }
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sp-ink-2);
+    font-weight: 500;
+  }
+  .mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 16px;
+    text-transform: none;
+    letter-spacing: -0.005em;
+    color: var(--sp-navy);
+  }
+  .mark-glyph {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--sp-navy);
+    color: var(--sp-beige);
+    display: grid; place-items: center;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-style: italic;
+    font-size: 16px;
+  }
+
+  .cover-title {
+    align-self: center;
+    padding: var(--space-7) 0;
+  }
+  .cover-title h1 {
+    max-width: 14ch;
+  }
+  .cover-title h1 em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--sp-forest);
+  }
+  .cover-sub {
+    margin-top: var(--space-5);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 22px;
+    color: var(--sp-ink-2);
+    max-width: 56ch;
+    line-height: 1.4;
+  }
+
+  .cover-foot {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-5);
+    border-top: 1px solid var(--sp-rule);
+    padding-top: var(--space-5);
+  }
+  @media (max-width: 720px) { .cover-foot { grid-template-columns: repeat(2, 1fr); } }
+  .cover-foot dl { margin: 0; }
+  .cover-foot dt {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--sp-ink-3);
+    margin-bottom: 6px;
+  }
+  .cover-foot dd { margin: 0; font-weight: 500; color: var(--sp-navy); }
+
+  /* TOC */
+  .toc {
+    columns: 2;
+    column-gap: var(--space-7);
+    padding: var(--space-6) 0;
+    list-style: none;
+    margin: 0;
+  }
+  @media (max-width: 720px) { .toc { columns: 1; } }
+  .toc li {
+    break-inside: avoid;
+    padding: 14px 0;
+    border-bottom: 1px dashed var(--sp-rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-3);
+  }
+  .toc a {
+    text-decoration: none;
+    font-weight: 500;
+    color: var(--sp-navy);
+    font-size: 16px;
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    flex: 1;
+  }
+  .toc a:hover { color: var(--sp-forest); }
+  .toc-num {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--sp-ink-3);
+    font-size: 13px;
+    min-width: 24px;
+  }
+  .toc-page {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--sp-ink-3);
+  }
+
+  /* ==========================================================
+     PRINCIPLES
+     ========================================================== */
+  .principle-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-7) var(--space-6);
+  }
+  @media (max-width: 720px) { .principle-grid { grid-template-columns: 1fr; gap: var(--space-6); } }
+  .principle {
+    border-top: 2px solid var(--sp-navy);
+    padding-top: var(--space-4);
+  }
+  .principle h3 {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    margin-bottom: var(--space-3);
+  }
+  .principle h3 em { font-style: italic; color: var(--sp-forest); font-weight: 300;}
+  .principle p { font-size: 15px; }
+
+  /* ==========================================================
+     COLOR
+     ========================================================== */
+  .color-stack { display: flex; flex-direction: column; gap: var(--space-7); }
+  .swatch-row {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: var(--space-6);
+    align-items: start;
+  }
+  @media (max-width: 860px) { .swatch-row { grid-template-columns: 1fr; } }
+  .swatch-row > h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+  .swatch-row > h3 em { font-style: italic; color: var(--sp-forest); font-weight: 300;}
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: var(--space-3);
+  }
+  .swatch {
+    background: var(--sp-paper);
+    border: 1px solid var(--sp-rule-soft);
+    border-radius: var(--r-md);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .swatch:hover { transform: translateY(-2px); box-shadow: var(--shadow-2); }
+  .swatch-color { height: 96px; border-bottom: 1px solid rgba(0,0,0,0.06); }
+  .swatch-info {
+    padding: 12px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .swatch-name {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--sp-navy);
+    letter-spacing: -0.005em;
+  }
+  .swatch-hex {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--sp-ink-3);
+    letter-spacing: 0.02em;
+  }
+  .swatch-role {
+    font-size: 11px;
+    color: var(--sp-ink-2);
+    margin-top: 4px;
+    line-height: 1.35;
+  }
+
+  /* ==========================================================
+     TYPOGRAPHY
+     ========================================================== */
+  .type-spec {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: var(--space-6);
+    border-top: 1px solid var(--sp-rule);
+    padding: var(--space-5) 0;
+    align-items: baseline;
+  }
+  @media (max-width: 860px) { .type-spec { grid-template-columns: 1fr; gap: var(--space-3); } }
+  .type-spec:last-child { border-bottom: 1px solid var(--sp-rule); }
+  .type-meta { display: flex; flex-direction: column; gap: 4px; }
+  .type-meta .name { font-weight: 600; font-size: 14px; letter-spacing: 0.02em; text-transform: uppercase; color: var(--sp-navy); }
+  .type-meta .specs { font-family: var(--font-mono); font-size: 11px; color: var(--sp-ink-3); line-height: 1.7; }
+  .type-sample { color: var(--sp-navy); }
+
+  .ts-display { font-family: var(--font-display); font-weight: 400; font-size: 64px; line-height: 1; letter-spacing: -0.02em; }
+  .ts-display em { font-style: italic; font-weight: 300; color: var(--sp-forest); }
+  .ts-h1 { font-family: var(--font-display); font-weight: 400; font-size: 40px; line-height: 1.05; letter-spacing: -0.015em; }
+  .ts-h2 { font-family: var(--font-ui); font-weight: 600; font-size: 28px; line-height: 1.15; letter-spacing: -0.01em; }
+  .ts-h3 { font-family: var(--font-ui); font-weight: 600; font-size: 20px; line-height: 1.25; letter-spacing: -0.005em; }
+  .ts-body { font-family: var(--font-ui); font-weight: 400; font-size: 16px; line-height: 1.5; }
+  .ts-body-sm { font-family: var(--font-ui); font-weight: 400; font-size: 14px; line-height: 1.5; color: var(--sp-ink-2); }
+  .ts-label { font-family: var(--font-ui); font-weight: 500; font-size: 12px; line-height: 1.3; text-transform: uppercase; letter-spacing: 0.12em; color: var(--sp-ink-2); }
+  .ts-mono { font-family: var(--font-mono); font-weight: 400; font-size: 13px; color: var(--sp-ink-2); letter-spacing: 0.01em; }
+
+  /* ==========================================================
+     SCALE STRIPS (spacing, radius, shadow)
+     ========================================================== */
+  .strip-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: var(--space-4); }
+  .strip {
+    background: var(--sp-paper);
+    border: 1px solid var(--sp-rule-soft);
+    border-radius: var(--r-md);
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    align-items: flex-start;
+  }
+  .strip-name { font-weight: 600; font-size: 13px; }
+  .strip-val { font-family: var(--font-mono); font-size: 11px; color: var(--sp-ink-3); }
+  .space-bar { background: var(--sp-forest); height: 8px; border-radius: 2px; }
+  .radius-box { width: 56px; height: 56px; background: var(--sp-navy); }
+  .shadow-box { width: 64px; height: 48px; background: var(--sp-paper); border-radius: var(--r-sm); margin: 12px 8px 16px; }
+
+  /* ==========================================================
+     COMPONENTS
+     ========================================================== */
+  .canvas {
+    background: var(--sp-paper);
+    border: 1px solid var(--sp-rule-soft);
+    border-radius: var(--r-lg);
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    position: relative;
+  }
+  .canvas-label {
+    position: absolute;
+    top: 12px; right: 16px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--sp-ink-3);
+    letter-spacing: 0.05em;
+  }
+  .row { display: flex; gap: var(--space-3); flex-wrap: wrap; align-items: center; }
+  .col { display: flex; flex-direction: column; gap: var(--space-3); }
+
+  /* ---- Buttons ---- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: -0.005em;
+    padding: 14px 22px;
+    border-radius: var(--r-pill);
+    border: 0;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.2s ease, background 0.2s ease;
+    text-decoration: none;
+    line-height: 1;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn-primary { background: var(--sp-navy); color: var(--sp-beige); box-shadow: var(--shadow-2); }
+  .btn-primary:hover { background: var(--sp-navy-deep); }
+  .btn-secondary { background: transparent; color: var(--sp-navy); border: 1.5px solid var(--sp-navy); }
+  .btn-secondary:hover { background: var(--sp-navy); color: var(--sp-beige); }
+  .btn-pro {
+    background: linear-gradient(135deg, var(--sp-forest) 0%, var(--sp-forest-deep) 100%);
+    color: var(--sp-paper);
+    box-shadow: var(--shadow-2);
+  }
+  .btn-ghost { background: transparent; color: var(--sp-navy); padding: 12px 16px; }
+  .btn-ghost:hover { background: rgba(22,36,55,0.06); }
+  .btn-danger { background: transparent; color: var(--sp-danger); border: 1.5px solid var(--sp-danger); }
+  .btn-sm { padding: 10px 16px; font-size: 13px; }
+  .btn-lg { padding: 18px 28px; font-size: 16px; }
+
+  /* ---- Inputs ---- */
+  .field { display: flex; flex-direction: column; gap: 6px; max-width: 360px; }
+  .field label { font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--sp-ink-2); }
+  .field input, .field textarea {
+    font-family: var(--font-ui);
+    font-size: 16px;
+    color: var(--sp-navy);
+    background: var(--sp-parchment);
+    border: 1.5px solid var(--sp-rule);
+    border-radius: var(--r-md);
+    padding: 14px 16px;
+    outline: none;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .field input:focus, .field textarea:focus {
+    border-color: var(--sp-forest);
+    background: var(--sp-paper);
+  }
+  .field input::placeholder { color: var(--sp-ink-3); }
+
+  /* ---- Tags / chips ---- */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: var(--r-pill);
+    background: var(--sp-cream);
+    border: 1px solid var(--sp-rule-soft);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--sp-ink-2);
+  }
+  .chip-active { background: var(--sp-navy); color: var(--sp-beige); border-color: var(--sp-navy); }
+  .chip-pro { background: var(--sp-forest); color: var(--sp-paper); border-color: var(--sp-forest); }
+  .chip-aussie { background: var(--sp-gold); color: var(--sp-navy-deep); border-color: var(--sp-gold); }
+
+  /* ---- Recipe Card ---- */
+  .recipe-card {
+    background: var(--sp-paper);
+    border-radius: var(--r-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-2);
+    border: 1px solid var(--sp-rule-soft);
+    max-width: 360px;
+  }
+  .recipe-img {
+    height: 220px;
+    background:
+      radial-gradient(at 30% 30%, #d49a4a 0%, transparent 50%),
+      radial-gradient(at 70% 60%, #6b8e3d 0%, transparent 50%),
+      linear-gradient(135deg, #c76f3f, #3a5a40);
+    position: relative;
+    overflow: hidden;
+  }
+  .recipe-img::after {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.4'/></svg>");
+    mix-blend-mode: overlay;
+    opacity: 0.5;
+  }
+  .recipe-img-tags { position: absolute; top: 14px; left: 14px; display: flex; gap: 6px; z-index: 2; }
+  .recipe-fav {
+    position: absolute; top: 14px; right: 14px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: rgba(255,253,248,0.92);
+    backdrop-filter: blur(8px);
+    display: grid; place-items: center;
+    z-index: 2;
+    cursor: pointer;
+  }
+  .recipe-body { padding: 18px 20px 20px; }
+  .recipe-meta {
+    display: flex; gap: 14px;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--sp-ink-3); font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .recipe-title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.15;
+    color: var(--sp-navy);
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+  .recipe-desc {
+    font-size: 13px;
+    color: var(--sp-ink-2);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+  .recipe-foot {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 14px; border-top: 1px solid var(--sp-rule-soft);
+  }
+  .recipe-pantry { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--sp-forest); font-weight: 600; }
+  .pantry-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--sp-forest); }
+
+  /* ---- Tab bar ---- */
+  .tabbar {
+    display: flex;
+    background: var(--sp-paper);
+    border-radius: var(--r-pill);
+    padding: 6px;
+    box-shadow: var(--shadow-1);
+    border: 1px solid var(--sp-rule-soft);
+    width: fit-content;
+  }
+  .tab {
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--sp-ink-2);
+    border-radius: var(--r-pill);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .tab.active { background: var(--sp-navy); color: var(--sp-beige); }
+
+  /* ---- Paywall card ---- */
+  .paywall {
+    background: linear-gradient(155deg, #070A10 0%, #101828 50%, #131E2A 100%);
+    color: var(--sp-paper);
+    border-radius: var(--r-xl);
+    padding: var(--space-6);
+    max-width: 380px;
+    position: relative;
+    overflow: hidden;
+  }
+  .paywall::before {
+    content: "";
+    position: absolute;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,150,90,0.12) 0%, transparent 70%);
+    top: -100px; right: -100px;
+    pointer-events: none;
+  }
+  .paywall-tier {
+    display: inline-block;
+    font-family: var(--font-ui);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sp-gold);
+    margin-bottom: var(--space-3);
+    position: relative;
+  }
+  .paywall h3 {
+    color: var(--sp-paper);
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 1.1;
+    margin-bottom: var(--space-3);
+    position: relative;
+  }
+  .paywall h3 em { font-style: italic; color: var(--sp-gold); font-weight: 300; }
+  .paywall ul {
+    list-style: none;
+    padding: 0; margin: 0 0 var(--space-5);
+    position: relative;
+  }
+  .paywall li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,253,248,0.08);
+    display: flex; gap: 10px; align-items: center;
+    font-size: 14px;
+    color: rgba(255,253,248,0.9);
+  }
+  .paywall li::before { content: "✓"; color: var(--sp-gold); font-weight: 600; }
+  .paywall-price { display: flex; align-items: baseline; gap: 6px; margin-bottom: var(--space-4); position: relative;}
+  .paywall-price .amount { font-family: var(--font-display); font-size: 40px; font-weight: 500; }
+  .paywall-price .period { font-size: 14px; color: rgba(255,253,248,0.6); }
+  .paywall-cta {
+    width: 100%;
+    background: linear-gradient(135deg, #EBC87D 0%, #C4965A 100%);
+    color: #162437;
+    font-weight: 700;
+    border-radius: var(--r-pill);
+    padding: 16px;
+    border: 0;
+    font-family: var(--font-ui);
+    font-size: 15px;
+    cursor: pointer;
+    position: relative;
+  }
+  .paywall-fine {
+    margin-top: 12px;
+    font-size: 11px;
+    color: rgba(255,253,248,0.55);
+    text-align: center;
+    position: relative;
+  }
+
+  /* ---- Pantry item row ---- */
+  .pantry-list { display: flex; flex-direction: column; max-width: 380px; background: var(--sp-paper); border-radius: var(--r-lg); border: 1px solid var(--sp-rule-soft); overflow: hidden; }
+  .pantry-row { display: flex; align-items: center; gap: 14px; padding: 14px 18px; border-bottom: 1px solid var(--sp-rule-soft); }
+  .pantry-row:last-child { border-bottom: 0; }
+  .pantry-icon { width: 40px; height: 40px; border-radius: 50%; background: var(--sp-cream); display: grid; place-items: center; font-size: 18px; flex-shrink: 0; }
+  .pantry-info { flex: 1; }
+  .pantry-name { font-weight: 600; font-size: 15px; color: var(--sp-navy); }
+  .pantry-sub { font-size: 12px; color: var(--sp-ink-3); margin-top: 2px; }
+  .pantry-qty { font-family: var(--font-display); font-size: 18px; font-weight: 500; color: var(--sp-forest); font-feature-settings: "tnum"; }
+
+  /* ==========================================================
+     BADGE LADDER
+     ========================================================== */
+  .ladder {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: var(--space-4);
+  }
+  .badge {
+    background: var(--sp-paper);
+    border: 1px solid var(--sp-rule-soft);
+    border-radius: var(--r-lg);
+    padding: var(--space-5) var(--space-4);
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .badge:hover { transform: translateY(-2px); box-shadow: var(--shadow-2); }
+  .badge-medal {
+    width: 72px; height: 72px;
+    margin: 0 auto var(--space-3);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    position: relative;
+    box-shadow: inset 0 -4px 8px rgba(0,0,0,0.15);
+  }
+  .badge-medal::after {
+    content: "";
+    position: absolute; inset: 6px;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(255,253,248,0.4);
+  }
+  .badge-tier { font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--sp-ink-3); margin-bottom: 4px; font-weight: 500;}
+  .badge-name { font-family: var(--font-display); font-weight: 500; font-size: 16px; color: var(--sp-navy); line-height: 1.2; margin-bottom: 4px; letter-spacing: -0.005em;}
+  .badge-days { font-family: var(--font-mono); font-size: 11px; color: var(--sp-ink-3); }
+
+  .m-1 { background: linear-gradient(140deg, #C9B69A, #8E7A5F); color: #fff; }
+  .m-2 { background: linear-gradient(140deg, #B89B6E, #7E6743); color: #fff; }
+  .m-3 { background: linear-gradient(140deg, #BFC4CA, #6E7782); color: #fff; }
+  .m-4 { background: linear-gradient(140deg, #C4965A, #9A6E36); color: #fff; }
+  .m-5 { background: linear-gradient(140deg, #C76F3F, #8E4321); color: #fff; }
+  .m-6 { background: linear-gradient(140deg, #B85C38, #7C3414); color: #fff; }
+  .m-7 { background: linear-gradient(140deg, #8FA68E, #4F6A4E); color: #fff; }
+  .m-8 { background: linear-gradient(140deg, #2D5A3D, #1A3826); color: #fff; }
+  .m-9 { background: linear-gradient(140deg, #2C5F7C, #133447); color: #fff; }
+  .m-10 { background: linear-gradient(140deg, #162437, #050A12); color: #fff; }
+
+  /* ==========================================================
+     ICONOGRAPHY
+     ========================================================== */
+  .icon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: var(--space-3);
+  }
+  .icon-cell {
+    background: var(--sp-paper);
+    border: 1px solid var(--sp-rule-soft);
+    border-radius: var(--r-md);
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: var(--sp-navy);
+  }
+  .icon-cell svg { width: 28px; height: 28px; }
+  .icon-cell span { font-size: 11px; color: var(--sp-ink-3); font-family: var(--font-mono); }
+
+  /* ==========================================================
+     CODE BLOCKS
+     ========================================================== */
+  .code-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--sp-rule);
+    margin-bottom: -1px;
+  }
+  .code-tab {
+    padding: 10px 18px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--sp-ink-2);
+    background: transparent;
+    border: 1px solid transparent;
+    border-bottom: 0;
+    cursor: pointer;
+    border-radius: var(--r-sm) var(--r-sm) 0 0;
+    transition: background 0.15s ease;
+  }
+  .code-tab.active { background: var(--sp-navy-deep); color: var(--sp-paper); border-color: var(--sp-navy-deep); }
+  pre.code {
+    background: var(--sp-navy-deep);
+    color: #E5DFD2;
+    padding: var(--space-5);
+    border-radius: 0 var(--r-md) var(--r-md) var(--r-md);
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 0;
+    border: 1px solid var(--sp-navy-deep);
+  }
+  pre.code .k { color: #C4965A; }    /* keyword */
+  pre.code .s { color: #8FA68E; }    /* string */
+  pre.code .c { color: #6B7280; font-style: italic; }   /* comment */
+  pre.code .n { color: #C7B391; }    /* name */
+  pre.code .t { color: #E5DFD2; }    /* text */
+
+  /* ==========================================================
+     MOTION
+     ========================================================== */
+  .motion-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-4);
+  }
+  .motion-card {
+    background: var(--sp-paper);
+    border: 1px solid var(--sp-rule-soft);
+    border-radius: var(--r-md);
+    padding: var(--space-5);
+  }
+  .motion-card h4 { margin-bottom: 8px; }
+  .motion-curve {
+    height: 60px;
+    background: linear-gradient(90deg, var(--sp-forest) 50%, var(--sp-rule-soft) 50%) no-repeat;
+    background-size: 0% 4px;
+    background-position: 0 100%;
+    border-bottom: 1px solid var(--sp-rule-soft);
+    position: relative;
+    margin-bottom: 12px;
+  }
+  .motion-dot {
+    position: absolute;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--sp-forest);
+    bottom: -1px;
+    transform: translate(0, 50%);
+    animation: motion-loop 2.6s infinite;
+  }
+  @keyframes motion-loop {
+    0%   { left: 0%;   bottom: 6%; }
+    50%  { left: 90%;  bottom: 90%; }
+    100% { left: 0%;   bottom: 6%; }
+  }
+
+  /* ==========================================================
+     FOOTER
+     ========================================================== */
+  footer {
+    border-top: 1px solid var(--sp-rule);
+    padding: var(--space-7) 0 var(--space-6);
+    color: var(--sp-ink-3);
+    font-size: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    justify-content: space-between;
+    align-items: center;
+  }
+  footer .mark { font-size: 14px; }
+
+  /* ==========================================================
+     UTILITY
+     ========================================================== */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5); }
+  @media (max-width: 860px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+  .pill-tag {
+    display: inline-block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    background: var(--sp-gold);
+    color: var(--sp-navy-deep);
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: var(--r-pill);
+  }
+
+  /* Print */
+  @media print {
+    body { background: white; }
+    body::before { display: none; }
+    section { page-break-inside: avoid; padding: var(--space-6) 0; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <!-- ============================================================
+       COVER
+       ============================================================ -->
+  <div class="shell cover">
+    <div class="topbar">
+      <div class="mark"><span class="mark-glyph">S</span><span>Sous Pantry</span></div>
+      <div>v1.1 — May 2026</div>
+    </div>
+
+    <div class="cover-title">
+      <h4 class="section-kicker" style="color: var(--sp-forest);">The Design System</h4>
+      <h1>A handbook for <em>everything</em> we put on a plate.</h1>
+      <p class="cover-sub">The visual, typographic, and interaction language behind Sous Pantry — the AI-powered pantry and meal-planning app, built for the way Australians actually cook.</p>
+    </div>
+
+    <div class="cover-foot">
+      <dl><dt>Platforms</dt><dd>iOS · Web</dd></dl>
+      <dl><dt>Surface</dt><dd>SwiftUI · CSS</dd></dl>
+      <dl><dt>Owner</dt><dd>James, Solo Studio</dd></dl>
+      <dl><dt>Status</dt><dd>Living Document</dd></dl>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       TOC
+       ============================================================ -->
+  <section class="shell" id="contents" style="padding-top: var(--space-7);">
+    <div class="section-meta">
+      <div class="section-num">00</div>
+      <div>
+        <h4 class="section-kicker">Contents</h4>
+        <h2>What's <em>inside</em></h2>
+      </div>
+    </div>
+    <ol class="toc">
+      <li><a href="#principles"><span class="toc-num">01</span><span>Brand Principles</span></a><span class="toc-page">p. 03</span></li>
+      <li><a href="#color"><span class="toc-num">02</span><span>Colour</span></a><span class="toc-page">p. 04</span></li>
+      <li><a href="#type"><span class="toc-num">03</span><span>Typography</span></a><span class="toc-page">p. 06</span></li>
+      <li><a href="#space"><span class="toc-num">04</span><span>Spacing &amp; Layout</span></a><span class="toc-page">p. 08</span></li>
+      <li><a href="#shape"><span class="toc-num">05</span><span>Shape &amp; Elevation</span></a><span class="toc-page">p. 09</span></li>
+      <li><a href="#icons"><span class="toc-num">06</span><span>Iconography</span></a><span class="toc-page">p. 10</span></li>
+      <li><a href="#components"><span class="toc-num">07</span><span>Components</span></a><span class="toc-page">p. 11</span></li>
+      <li><a href="#patterns"><span class="toc-num">08</span><span>Hero Patterns</span></a><span class="toc-page">p. 14</span></li>
+      <li><a href="#badges"><span class="toc-num">09</span><span>Milestone Ladder</span></a><span class="toc-page">p. 16</span></li>
+      <li><a href="#motion"><span class="toc-num">10</span><span>Motion</span></a><span class="toc-page">p. 17</span></li>
+      <li><a href="#voice"><span class="toc-num">11</span><span>Voice &amp; Tone</span></a><span class="toc-page">p. 18</span></li>
+      <li><a href="#tokens"><span class="toc-num">12</span><span>Code Tokens</span></a><span class="toc-page">p. 19</span></li>
+    </ol>
+  </section>
+
+  <!-- ============================================================
+       01 — PRINCIPLES
+       ============================================================ -->
+  <section class="shell" id="principles">
+    <div class="section-meta">
+      <div class="section-num">01</div>
+      <div>
+        <h4 class="section-kicker">Brand Principles</h4>
+        <h2>Cooking is <em>craft.</em><br>So is every screen.</h2>
+      </div>
+    </div>
+    <p class="lede">Sous Pantry sits on the kitchen counter, splattered with olive oil, used in mid-recipe panic. It needs to feel calm, capable, and a little bit beautiful. These principles guide every design decision.</p>
+
+    <div class="principle-grid" style="margin-top: var(--space-7);">
+      <div class="principle">
+        <h3>Warm, <em>not</em> sterile.</h3>
+        <p>We borrow from cookbooks and farmer's markets, not SaaS dashboards. Beige paper, hand-set type, soft shadows. Avoid pure white. Avoid gunmetal grey. The app should feel like something you'd happily leave open on the bench.</p>
+      </div>
+      <div class="principle">
+        <h3>Information, <em>then</em> ornament.</h3>
+        <p>Pantry counts, expiry dates, missing ingredients — these are the job. Decorative type and warm tones serve the data, never compete with it. Numbers are tabular. Quantities are prominent. Every flourish earns its place.</p>
+      </div>
+      <div class="principle">
+        <h3>Confidently <em>local.</em></h3>
+        <p>Coles, Woolies, Aldi, IGA. Metric. Aussie ingredient names. We don't pretend to be from somewhere else. The product is opinionated about being made here, and the design reflects that with subtle warmth rather than loud flag-waving.</p>
+      </div>
+      <div class="principle">
+        <h3>Premium without <em>precious.</em></h3>
+        <p>Polished, not pretentious. We use editorial typography and considered spacing — but we're still the app you'll use with one hand while stirring. Touch targets stay generous. Copy stays plain. Beauty bows to function when they conflict.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       02 — COLOR
+       ============================================================ -->
+  <section class="shell" id="color">
+    <div class="section-meta">
+      <div class="section-num">02</div>
+      <div>
+        <h4 class="section-kicker">Colour</h4>
+        <h2>A pantry palette, <em>not</em> a tech palette.</h2>
+      </div>
+    </div>
+    <p class="lede">Warm beige is the canvas. Dark navy is the ink. Forest green is the act. Everything else is a seasoning — used sparingly, never the main dish.</p>
+
+    <div class="color-stack" style="margin-top: var(--space-7);">
+
+      <div class="swatch-row">
+        <h3>Foundation <em>—</em><br>the page itself.</h3>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="swatch-color" style="background: #EDE9DF;"></div><div class="swatch-info"><span class="swatch-name">Beige</span><span class="swatch-hex">#EDE9DF</span><span class="swatch-role">App background. The default canvas.</span></div></div>
+          <div class="swatch"><div class="swatch-color" style="background: #F7F3EC;"></div><div class="swatch-info"><span class="swatch-name">Cream</span><span class="swatch-hex">#F7F3EC</span><span class="swatch-role">Section / chip backgrounds.</span></div></div>
+          <div class="swatch"><div class="swatch-color" style="background: #E3EDE6;"></div><div class="swatch-info"><span class="swatch-name">Soft Mint</span><span class="swatch-hex">#E3EDE6</span><span class="swatch-role">Subtle highlights, chip backgrounds, mint accents.</span></div></div>
+          <div class="swatch"><div class="swatch-color" style="background: #FAF6EE;"></div><div class="swatch-info"><span class="swatch-name">Parchment</span><span class="swatch-hex">#FAF6EE</span><span class="swatch-role">Input fields, subtle wells.</span></div></div>
+          <div class="swatch"><div class="swatch-color" style="background: #FFFDF8; border-bottom: 1px solid #e3ddd0;"></div><div class="swatch-info"><span class="swatch-name">Paper</span><span class="swatch-hex">#FFFDF8</span><span class="swatch-role">Cards, sheets, modals — the lift.</span></div></div>
+        </div>
+      </div>
+
+      <div class="swatch-row">
+        <h3>Ink <em>—</em><br>where the words live.</h3>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="swatch-color" style="background: #162437;"></div><div class="swatch-info"><span class="swatch-name">Navy</span><span class="swatch-hex">#162437</span><span class="swatch-role">Primary text, primary buttons.</span></div></div>
+          <div class="swatch"><div class="swatch-color" style="background: #0F1A26;"></div><div class="swatch-info"><span class="swatch-name">Navy Deep</span><span class="swatch-hex">#0F1A26</span><span class="swatch-role">Pressed states, paywall gradient.</span></div></div>
+          <div class="swatch"><div class="swatch-color" style="background: #647080;"></div><div class="swatch-info"><span class="swatch-name">Slate</span><span class="swatch-hex">#647080</span><span class="swatch-role">Body copy, supporting text.</span></div></div>
+          <div class="swatch"><div class="swatch-color" style="background: #7B8794;"></div><div class="swatch-info"><span class="swatch-name">Ink 3</span><span class="swatch-hex">#7B8794</span><span class="swatch-role">Captions, metadata, placeholders.</span></div></div>
+        </div>
+      </div>
+
+      <div class="swatch-row">
+        <h3>Action <em>—</em><br>the doing colour.</h3>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="swatch-color" style="background: #2D5A3D;"></div><div class="swatch-info"><span class="swatch-name">Forest</span><span class="swatch-hex">#2D5A3D</span><span class="swatch-role">Pro features, success, "fresh".</span></div></div>
+          <div class="swatch"><div class="swatch-color" style="background: #1E4029;"></div><div class="swatch-info"><span class="swatch-name">Forest Deep</span><span class="swatch-hex">#1E4029</span><span class="swatch-role">Pro pressed, gradient terminus.</span></div></div>
+          <div class="swatch"><div class="swatch-color" style="background: #8FA68E;"></div><div class="swatch-info"><span class="swatch-name">Sage</span><span class="swatch-hex">#8FA68E</span><span class="swatch-role">Subtle highlights, illustration.</span></div></div>
+        </div>
+      </div>
+
+      <div class="swatch-row">
+        <h3>Spice <em>—</em><br>used sparingly.</h3>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="swatch-color" style="background: #C76F3F;"></div><div class="swatch-info"><span class="swatch-name">Terracotta</span><span class="swatch-hex">#C76F3F</span><span class="swatch-role">Warmth, alerts, recipe heat.</span></div></div>
+          <div class="swatch"><div class="swatch-color" style="background: #C4965A;"></div><div class="swatch-info"><span class="swatch-name">Gold</span><span class="swatch-hex">#C4965A</span><span class="swatch-role">Premium tier, premium accents.</span></div></div>
+          <div class="swatch"><div class="swatch-color" style="background: #B85C38;"></div><div class="swatch-info"><span class="swatch-name">Clay</span><span class="swatch-hex">#B85C38</span><span class="swatch-role">Pressed terracotta, deep accents.</span></div></div>
+        </div>
+      </div>
+
+      <div class="swatch-row">
+        <h3>Semantic <em>—</em><br>system signals.</h3>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="swatch-color" style="background: #2D5A3D;"></div><div class="swatch-info"><span class="swatch-name">Success</span><span class="swatch-hex">#2D5A3D</span><span class="swatch-role">In stock, in date, completed.</span></div></div>
+          <div class="swatch"><div class="swatch-color" style="background: #C76F3F;"></div><div class="swatch-info"><span class="swatch-name">Warning</span><span class="swatch-hex">#C76F3F</span><span class="swatch-role">Expiring soon, low stock.</span></div></div>
+          <div class="swatch"><div class="swatch-color" style="background: #B23A48;"></div><div class="swatch-info"><span class="swatch-name">Danger</span><span class="swatch-hex">#B23A48</span><span class="swatch-role">Expired, destructive actions.</span></div></div>
+          <div class="swatch"><div class="swatch-color" style="background: #2C5F7C;"></div><div class="swatch-info"><span class="swatch-name">Info</span><span class="swatch-hex">#2C5F7C</span><span class="swatch-role">Tips, neutral notifications.</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Usage rules -->
+    <div class="grid-2" style="margin-top: var(--space-7); gap: var(--space-7);">
+      <div>
+        <h4 class="section-kicker" style="color: var(--sp-forest);">Do</h4>
+        <p>Pair Beige with Navy at high contrast. Reserve Forest for Pro and success states. Use Gold only for premium tier moments and milestone celebrations. Allow generous Beige to breathe — it's the most distinctive thing about us.</p>
+      </div>
+      <div>
+        <h4 class="section-kicker" style="color: var(--sp-danger);">Don't</h4>
+        <p>Don't use pure white (#FFFFFF) — it breaks the warmth. Don't add new accent hues. Don't use Terracotta for primary actions; Navy is the action button. Don't apply gradients to anything except the paywall and Pro CTA — gradients are reserved.</p>
+      </div>
+    </div>
+
+    <!-- Contrast table -->
+    <div style="margin-top: var(--space-6); padding: var(--space-5); background: var(--sp-paper); border: 1px solid var(--sp-rule-soft); border-radius: var(--r-md);">
+      <h4 style="margin-bottom: var(--space-3);">Accessible Pairings (WCAG AA+)</h4>
+      <p class="ts-mono" style="margin: 0;">
+        Navy (#162437) on Beige — 11.2:1 ✓ AAA &nbsp;·&nbsp;
+        Navy (#162437) on Paper — 14.7:1 ✓ AAA &nbsp;·&nbsp;
+        Slate (#647080) on Beige — 5.4:1 ✓ AA &nbsp;·&nbsp;
+        Forest (#2D5A3D) on Paper — 7.1:1 ✓ AAA &nbsp;·&nbsp;
+        Beige on Navy (#162437) — 11.2:1 ✓ AAA
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       03 — TYPOGRAPHY
+       ============================================================ -->
+  <section class="shell" id="type">
+    <div class="section-meta">
+      <div class="section-num">03</div>
+      <div>
+        <h4 class="section-kicker">Typography</h4>
+        <h2>Two voices, <em>working in concert.</em></h2>
+      </div>
+    </div>
+    <p class="lede">Outfit is the working voice — clear, geometric, confident. Fraunces is the editorial voice — warmth, italics, the cookbook feel. Use them like a chef uses salt and acid: Outfit for everything, Fraunces to brighten.</p>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); margin-top: var(--space-7);">
+      <div class="canvas">
+        <span class="canvas-label">DISPLAY</span>
+        <div style="font-family: var(--font-display); font-size: 96px; line-height: 0.95; font-weight: 400; letter-spacing: -0.025em; color: var(--sp-navy);">
+          Aa<span style="font-style: italic; font-weight: 300; color: var(--sp-forest);">Aa</span>
+        </div>
+        <div>
+          <div style="font-weight: 700; font-size: 14px; color: var(--sp-navy);">Fraunces</div>
+          <div class="small">Editorial · Recipe titles · Hero numbers · Italic accents</div>
+        </div>
+      </div>
+      <div class="canvas">
+        <span class="canvas-label">UI</span>
+        <div style="font-family: var(--font-ui); font-size: 96px; line-height: 0.95; font-weight: 600; letter-spacing: -0.02em; color: var(--sp-navy);">
+          Aa<span style="font-weight: 300;">Aa</span>
+        </div>
+        <div>
+          <div style="font-weight: 700; font-size: 14px; color: var(--sp-navy);">Outfit</div>
+          <div class="small">Interface · Body · Buttons · Numbers · Labels</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="canvas" style="margin-top: var(--space-5); background: var(--sp-cream); border-color: var(--sp-rule);">
+      <h4>iOS App — System Fonts</h4>
+      <p class="ts-body-sm">The live iOS app uses <strong>SF Pro</strong> (Apple's system font) throughout the UI via SwiftUI's semantic scale (<code>.font(.title2)</code>, <code>.font(.subheadline)</code> etc). Fraunces and Outfit are used on the marketing website and in branding materials — not in the app itself. The Oregano typeface appears in decorative logo treatments only.</p>
+    </div>
+
+    <h3 style="margin-top: var(--space-7); margin-bottom: var(--space-4); font-family: var(--font-display); font-weight: 400; font-size: 28px;">Type Ramp</h3>
+
+    <div>
+      <div class="type-spec">
+        <div class="type-meta">
+          <span class="name">Display</span>
+          <span class="specs">Fraunces · 64 / 64 · -0.02em<br>Weight 400 / Italic 300</span>
+        </div>
+        <div class="type-sample"><div class="ts-display">Make it <em>mine</em></div></div>
+      </div>
+      <div class="type-spec">
+        <div class="type-meta">
+          <span class="name">Headline</span>
+          <span class="specs">Fraunces · 40 / 42 · -0.015em<br>Weight 400</span>
+        </div>
+        <div class="type-sample"><div class="ts-h1">One-pan Mediterranean baked feta</div></div>
+      </div>
+      <div class="type-spec">
+        <div class="type-meta">
+          <span class="name">Title</span>
+          <span class="specs">Outfit · 28 / 32 · -0.01em<br>Weight 600</span>
+        </div>
+        <div class="type-sample"><div class="ts-h2">Tonight's pantry suggestions</div></div>
+      </div>
+      <div class="type-spec">
+        <div class="type-meta">
+          <span class="name">Subtitle</span>
+          <span class="specs">Outfit · 20 / 25 · -0.005em<br>Weight 600</span>
+        </div>
+        <div class="type-sample"><div class="ts-h3">3 dishes you can make right now</div></div>
+      </div>
+      <div class="type-spec">
+        <div class="type-meta">
+          <span class="name">Body</span>
+          <span class="specs">Outfit · 16 / 24 · 0em<br>Weight 400</span>
+        </div>
+        <div class="type-sample"><div class="ts-body">Toss the cherry tomatoes with a generous splash of olive oil and bake at 200°C until they collapse and start to caramelise.</div></div>
+      </div>
+      <div class="type-spec">
+        <div class="type-meta">
+          <span class="name">Body Small</span>
+          <span class="specs">Outfit · 14 / 21 · 0em<br>Weight 400</span>
+        </div>
+        <div class="type-sample"><div class="ts-body-sm">Uses 8 of 11 ingredients you already have. Buy parsley and feta to complete.</div></div>
+      </div>
+      <div class="type-spec">
+        <div class="type-meta">
+          <span class="name">Label</span>
+          <span class="specs">Outfit · 12 / 16 · 0.12em<br>Weight 500 · UPPER</span>
+        </div>
+        <div class="type-sample"><div class="ts-label">Pantry Pro · 30-min · Vegetarian</div></div>
+      </div>
+      <div class="type-spec">
+        <div class="type-meta">
+          <span class="name">Mono</span>
+          <span class="specs">JetBrains Mono · 13 / 21 · 0.01em<br>Weight 400 — for codes, IDs, prices</span>
+        </div>
+        <div class="type-sample"><div class="ts-mono">$8.99 / month · #647080 · 250g</div></div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top: var(--space-6);">
+      <div class="canvas">
+        <h4>Numerals</h4>
+        <p class="ts-body-sm">Quantities, expiry days, prices, and badge counters always use <strong>tabular figures</strong> for clean alignment in lists. Recipe titles and editorial headlines may use proportional figures with <strong>old-style numbers</strong> for warmth.</p>
+        <div style="font-family: var(--font-mono); font-size: 24px; color: var(--sp-navy); font-feature-settings: 'tnum';">250g · 1.5L · 12 days · $8.99</div>
+      </div>
+      <div class="canvas">
+        <h4>Italics &amp; Accent</h4>
+        <p class="ts-body-sm">Fraunces italics are reserved for emphasis in display headlines and editorial moments — section openers, paywall headlines, milestone names. Don't italicise body text.</p>
+        <div style="font-family: var(--font-display); font-size: 32px; color: var(--sp-navy); font-weight: 400; line-height: 1.1;">Pantry, <em style="font-weight: 300; color: var(--sp-forest);">perfected.</em></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       04 — SPACING
+       ============================================================ -->
+  <section class="shell" id="space">
+    <div class="section-meta">
+      <div class="section-num">04</div>
+      <div>
+        <h4 class="section-kicker">Spacing &amp; Layout</h4>
+        <h2>Built on a <em>4-point grid.</em></h2>
+      </div>
+    </div>
+    <p class="lede">Every margin, padding, and gap is a multiple of 4. This keeps screens rhythmically consistent across iOS, Android, and web — and makes spacing decisions a question of "which step?" rather than "which number?".</p>
+
+    <div class="strip-grid" style="margin-top: var(--space-7);">
+      <div class="strip"><div class="strip-name">space-1</div><div class="space-bar" style="width: 4px;"></div><div class="strip-val">4 px</div></div>
+      <div class="strip"><div class="strip-name">space-2</div><div class="space-bar" style="width: 8px;"></div><div class="strip-val">8 px</div></div>
+      <div class="strip"><div class="strip-name">space-3</div><div class="space-bar" style="width: 12px;"></div><div class="strip-val">12 px</div></div>
+      <div class="strip"><div class="strip-name">space-4</div><div class="space-bar" style="width: 16px;"></div><div class="strip-val">16 px · base</div></div>
+      <div class="strip"><div class="strip-name">space-5</div><div class="space-bar" style="width: 24px;"></div><div class="strip-val">24 px</div></div>
+      <div class="strip"><div class="strip-name">space-6</div><div class="space-bar" style="width: 32px;"></div><div class="strip-val">32 px</div></div>
+      <div class="strip"><div class="strip-name">space-7</div><div class="space-bar" style="width: 48px;"></div><div class="strip-val">48 px</div></div>
+      <div class="strip"><div class="strip-name">space-8</div><div class="space-bar" style="width: 64px;"></div><div class="strip-val">64 px</div></div>
+      <div class="strip"><div class="strip-name">space-9</div><div class="space-bar" style="width: 96px;"></div><div class="strip-val">96 px</div></div>
+    </div>
+
+    <div class="grid-2" style="margin-top: var(--space-6);">
+      <div class="canvas">
+        <h4>Mobile Layout</h4>
+        <p class="ts-body-sm"><strong>Screen padding:</strong> space-5 (24px) edge inset.<br>
+        <strong>Section gap:</strong> space-7 (48px) between major sections.<br>
+        <strong>Component gap:</strong> space-4 (16px) between cards in a stack.<br>
+        <strong>Inline gap:</strong> space-2 / space-3 between adjacent UI elements.<br>
+        <strong>Touch target:</strong> Minimum 44 × 44pt. Always.</p>
+      </div>
+      <div class="canvas">
+        <h4>Web &amp; Marketing</h4>
+        <p class="ts-body-sm"><strong>Container:</strong> max 1240px, centered.<br>
+        <strong>Section gap:</strong> space-9 (96px) vertical rhythm.<br>
+        <strong>Grid:</strong> 12-column with 24px gutters.<br>
+        <strong>Block padding:</strong> space-6 (32px) inside cards.<br>
+        <strong>Reading width:</strong> 56–62ch for body copy.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       05 — SHAPE & ELEVATION
+       ============================================================ -->
+  <section class="shell" id="shape">
+    <div class="section-meta">
+      <div class="section-num">05</div>
+      <div>
+        <h4 class="section-kicker">Shape &amp; Elevation</h4>
+        <h2>Soft corners, <em>quiet</em> shadows.</h2>
+      </div>
+    </div>
+    <p class="lede">Shapes are generous and rounded. Shadows whisper rather than shout — they suggest paper layered on a kitchen bench, not floating glass. Reserve hard shadows for premium moments only.</p>
+
+    <h3 style="margin-top: var(--space-7); margin-bottom: var(--space-4); font-family: var(--font-display); font-weight: 400; font-size: 24px;">Radius Scale</h3>
+    <div class="strip-grid">
+      <div class="strip"><div class="radius-box" style="border-radius: 8px;"></div><div class="strip-name">r-sm</div><div class="strip-val">8px · chips, tags</div></div>
+      <div class="strip"><div class="radius-box" style="border-radius: 12px;"></div><div class="strip-name">r-md</div><div class="strip-val">12px · inputs, small cards</div></div>
+      <div class="strip"><div class="radius-box" style="border-radius: 16px;"></div><div class="strip-name">r-lg</div><div class="strip-val">16px · cards, sheets</div></div>
+      <div class="strip"><div class="radius-box" style="border-radius: 24px;"></div><div class="strip-name">r-xl</div><div class="strip-val">24px · recipe cards, paywall</div></div>
+      <div class="strip"><div class="radius-box" style="border-radius: 32px;"></div><div class="strip-name">r-2xl</div><div class="strip-val">32px · hero blocks</div></div>
+      <div class="strip"><div class="radius-box" style="border-radius: 999px;"></div><div class="strip-name">r-pill</div><div class="strip-val">∞ · buttons, chips, tabs</div></div>
+    </div>
+
+    <h3 style="margin-top: var(--space-7); margin-bottom: var(--space-4); font-family: var(--font-display); font-weight: 400; font-size: 24px;">Elevation</h3>
+    <div class="strip-grid">
+      <div class="strip"><div class="shadow-box" style="box-shadow: var(--shadow-1);"></div><div class="strip-name">shadow-1</div><div class="strip-val">Subtle · borders, chips</div></div>
+      <div class="strip"><div class="shadow-box" style="box-shadow: var(--shadow-2);"></div><div class="strip-name">shadow-2</div><div class="strip-val">Card · default lift</div></div>
+      <div class="strip"><div class="shadow-box" style="box-shadow: var(--shadow-3);"></div><div class="strip-name">shadow-3</div><div class="strip-val">Float · tab bars, FABs</div></div>
+      <div class="strip"><div class="shadow-box" style="box-shadow: var(--shadow-4);"></div><div class="strip-name">shadow-4</div><div class="strip-val">Modal · sheets, dialogs</div></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       06 — ICONS
+       ============================================================ -->
+  <section class="shell" id="icons">
+    <div class="section-meta">
+      <div class="section-num">06</div>
+      <div>
+        <h4 class="section-kicker">Iconography</h4>
+        <h2>Drawn with a <em>steady hand.</em></h2>
+      </div>
+    </div>
+    <p class="lede">Outline icons. 1.75px stroke. Rounded caps and joins. 24×24 grid. Use Apple's SF Symbols on iOS (Regular weight) and Material Symbols Rounded on Android (Weight 400, Grade 0, Optical Size 24). For custom marks, follow the same construction.</p>
+
+    <div class="icon-grid" style="margin-top: var(--space-7);">
+      <div class="icon-cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V5a3 3 0 0 1 6 0v3"/></svg><span>pantry</span></div>
+      <div class="icon-cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>expires</span></div>
+      <div class="icon-cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg><span>next</span></div>
+      <div class="icon-cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg><span>save</span></div>
+      <div class="icon-cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M7 12h10"/></svg><span>add</span></div>
+      <div class="icon-cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg><span>remove</span></div>
+      <div class="icon-cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><span>search</span></div>
+      <div class="icon-cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg><span>milestone</span></div>
+      <div class="icon-cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>plan</span></div>
+      <div class="icon-cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg><span>recent</span></div>
+      <div class="icon-cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>settings</span></div>
+      <div class="icon-cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14 0M8.5 16.5a6 6 0 0 1 7 0M2 8.82a15 15 0 0 1 20 0M12 20h.01"/></svg><span>siri</span></div>
+    </div>
+
+    <div class="canvas" style="margin-top: var(--space-5);">
+      <h4>Construction Rules</h4>
+      <p class="ts-body-sm">24×24 viewbox · 1.75px stroke · 2px corner radius · round line caps and joins · centred on the optical axis (not pixel centre). Filled icons reserved for tab bar selected state and rating stars only.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       07 — COMPONENTS
+       ============================================================ -->
+  <section class="shell" id="components">
+    <div class="section-meta">
+      <div class="section-num">07</div>
+      <div>
+        <h4 class="section-kicker">Components</h4>
+        <h2>The kit, <em>laid out.</em></h2>
+      </div>
+    </div>
+    <p class="lede">Every interaction primitive Sous Pantry uses. These are tuned for fingers in a kitchen, so touch targets stay big, copy stays clear, and visual language stays consistent across iOS and Android implementations.</p>
+
+    <!-- Buttons -->
+    <h3 style="margin-top: var(--space-7); margin-bottom: var(--space-3); font-family: var(--font-display); font-weight: 400; font-size: 24px;">Buttons</h3>
+    <div class="canvas">
+      <span class="canvas-label">BUTTONS · 6 VARIANTS</span>
+      <div class="row">
+        <button class="btn btn-primary">Add to pantry</button>
+        <button class="btn btn-secondary">Skip for now</button>
+        <button class="btn btn-pro">⚡ Try Pro free</button>
+        <button class="btn btn-ghost">Maybe later</button>
+        <button class="btn btn-danger">Remove item</button>
+      </div>
+      <div class="row">
+        <button class="btn btn-primary btn-sm">Save</button>
+        <button class="btn btn-primary btn-lg">Continue</button>
+      </div>
+      <p class="small" style="margin: 0;">Primary buttons own the screen's main action. Secondary buttons sit alongside as alternatives. Pro buttons are reserved exclusively for paywall and Pro-feature CTAs. Pill radius (∞) on all buttons.</p>
+    </div>
+
+    <!-- Inputs -->
+    <h3 style="margin-top: var(--space-7); margin-bottom: var(--space-3); font-family: var(--font-display); font-weight: 400; font-size: 24px;">Inputs</h3>
+    <div class="canvas">
+      <span class="canvas-label">INPUTS · TEXT, FOCUS, SEARCH</span>
+      <div class="row" style="align-items: flex-start;">
+        <div class="field">
+          <label>Item name</label>
+          <input type="text" placeholder="e.g. cherry tomatoes" value="Heirloom tomatoes">
+        </div>
+        <div class="field">
+          <label>Quantity</label>
+          <input type="text" placeholder="250g">
+        </div>
+        <div class="field">
+          <label>Best before</label>
+          <input type="text" value="Mon 4 May 2026">
+        </div>
+      </div>
+    </div>
+
+    <!-- Chips -->
+    <h3 style="margin-top: var(--space-7); margin-bottom: var(--space-3); font-family: var(--font-display); font-weight: 400; font-size: 24px;">Chips &amp; Tags</h3>
+    <div class="canvas">
+      <span class="canvas-label">CHIPS · 4 VARIANTS</span>
+      <div class="row">
+        <span class="chip">Vegetarian</span>
+        <span class="chip">30 min</span>
+        <span class="chip">Easy</span>
+        <span class="chip chip-active">Selected</span>
+        <span class="chip chip-pro">⚡ Pro</span>
+        <span class="chip chip-aussie">🇦🇺 Coles</span>
+        <span class="chip">Gluten-free</span>
+        <span class="chip">Pantry-ready</span>
+      </div>
+    </div>
+
+    <!-- Tab bar -->
+    <h3 style="margin-top: var(--space-7); margin-bottom: var(--space-3); font-family: var(--font-display); font-weight: 400; font-size: 24px;">Tab Bar (App navigation)</h3>
+    <div class="canvas">
+      <span class="canvas-label">MAIN TABS · 5 ITEMS</span>
+      <div class="tabbar">
+        <div class="tab active">Home</div>
+        <div class="tab">Pantry</div>
+        <div class="tab">Plan &amp; Cook</div>
+        <div class="tab">Shopping</div>
+        <div class="tab">Account</div>
+      </div>
+      <p class="small" style="margin: 0;">The five-tab iOS app navigation. Pill radius. Active state (Home shown) uses Navy on Beige for maximum contrast. Inactive tabs are Ink-2 on transparent.</p>
+    </div>
+
+    <!-- Pantry list -->
+    <h3 style="margin-top: var(--space-7); margin-bottom: var(--space-3); font-family: var(--font-display); font-weight: 400; font-size: 24px;">Pantry List Row</h3>
+    <div class="canvas">
+      <span class="canvas-label">PANTRY ROW · 4 STATES</span>
+      <div class="pantry-list">
+        <div class="pantry-row">
+          <div class="pantry-icon">🍅</div>
+          <div class="pantry-info">
+            <div class="pantry-name">Cherry tomatoes</div>
+            <div class="pantry-sub">Best before in 4 days</div>
+          </div>
+          <div class="pantry-qty">250g</div>
+        </div>
+        <div class="pantry-row">
+          <div class="pantry-icon">🧀</div>
+          <div class="pantry-info">
+            <div class="pantry-name">Persian feta</div>
+            <div class="pantry-sub" style="color: var(--sp-warning);">Expires tomorrow</div>
+          </div>
+          <div class="pantry-qty" style="color: var(--sp-warning);">180g</div>
+        </div>
+        <div class="pantry-row">
+          <div class="pantry-icon">🌿</div>
+          <div class="pantry-info">
+            <div class="pantry-name">Flat-leaf parsley</div>
+            <div class="pantry-sub">Fresh · added today</div>
+          </div>
+          <div class="pantry-qty">1 bunch</div>
+        </div>
+        <div class="pantry-row">
+          <div class="pantry-icon">🥖</div>
+          <div class="pantry-info">
+            <div class="pantry-name">Sourdough loaf</div>
+            <div class="pantry-sub" style="color: var(--sp-danger);">Expired 2 days ago</div>
+          </div>
+          <div class="pantry-qty" style="color: var(--sp-danger);">½ loaf</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       08 — HERO PATTERNS
+       ============================================================ -->
+  <section class="shell" id="patterns">
+    <div class="section-meta">
+      <div class="section-num">08</div>
+      <div>
+        <h4 class="section-kicker">Hero Patterns</h4>
+        <h2>The big <em>moments.</em></h2>
+      </div>
+    </div>
+    <p class="lede">Three composite patterns carry the most weight in the product: the recipe card, the paywall, and the pantry empty state. Get these right and the rest follows.</p>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); margin-top: var(--space-7); align-items: start;">
+      <div class="canvas">
+        <span class="canvas-label">RECIPE CARD</span>
+        <div class="recipe-card">
+          <div class="recipe-img">
+            <div class="recipe-img-tags">
+              <span class="chip chip-pro" style="font-size: 10px; padding: 4px 10px;">⚡ Pro</span>
+              <span class="chip" style="font-size: 10px; padding: 4px 10px; background: rgba(255,253,248,0.92); border: 0;">Vegetarian</span>
+            </div>
+            <div class="recipe-fav">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#162437" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </div>
+          </div>
+          <div class="recipe-body">
+            <div class="recipe-meta"><span>30 min</span><span>·</span><span>Easy</span><span>·</span><span>Serves 4</span></div>
+            <div class="recipe-title">One-pan baked feta with tomatoes &amp; herbs</div>
+            <div class="recipe-desc">Cherry tomatoes blistered with garlic, lemon, and thyme around a slab of Persian feta — finished with parsley.</div>
+            <div class="recipe-foot">
+              <div class="recipe-pantry"><span class="pantry-dot"></span> 8 of 11 ingredients in pantry</div>
+              <button class="btn btn-ghost btn-sm" style="padding: 6px 0;">Cook →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="canvas">
+        <span class="canvas-label">PAYWALL</span>
+        <div class="paywall">
+          <div class="paywall-tier">SOUS PANTRY PREMIUM</div>
+          <h3>Your pantry, fully <em>in control.</em></h3>
+          <ul>
+            <li>Unlimited AI recipe suggestions</li>
+            <li>AI-enabled shopping list</li>
+            <li>Save suggested recipes</li>
+            <li>Add my own recipes</li>
+            <li>Meal planner</li>
+            <li>Digital receipt sync</li>
+            <li>iCloud sync</li>
+            <li>Family Sharing</li>
+            <li>Ad-free experiences</li>
+          </ul>
+          <div class="paywall-price">
+            <span class="amount">$4.99</span>
+            <span class="period">/month, billed annually</span>
+          </div>
+          <button class="paywall-cta">Start 7-Day Free Trial</button>
+          <p class="paywall-fine">Free for 7 days, then from $X/month. Cancel anytime in Settings. Subscriptions auto-renew unless cancelled 24 hours before the end of the current period.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="canvas" style="margin-top: var(--space-5);">
+      <span class="canvas-label">EMPTY STATE</span>
+      <div style="display: flex; flex-direction: column; align-items: center; padding: var(--space-7) var(--space-5); text-align: center; max-width: 420px; margin: 0 auto;">
+        <div style="font-size: 56px; margin-bottom: var(--space-3); filter: grayscale(0.3);">🥬</div>
+        <h3 style="font-family: var(--font-display); font-weight: 400; font-size: 28px; line-height: 1.1; letter-spacing: -0.01em; margin-bottom: var(--space-3);">Your pantry is <em style="color: var(--sp-forest); font-weight: 300; font-style: italic;">waiting</em></h3>
+        <p style="font-size: 15px; margin-bottom: var(--space-5);">Snap a photo of your shopping receipt or add items by hand. Sous Pantry will start suggesting meals from what you've got.</p>
+        <div class="row" style="justify-content: center;">
+          <button class="btn btn-primary">📷 Scan a receipt</button>
+          <button class="btn btn-secondary">Add manually</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       09 — BADGES
+       ============================================================ -->
+  <section class="shell" id="badges">
+    <div class="section-meta">
+      <div class="section-num">09</div>
+      <div>
+        <h4 class="section-kicker">Milestone Ladder</h4>
+        <h2>Ten steps from <em>starter</em> to legend.</h2>
+      </div>
+    </div>
+    <p class="lede">The streak system. Each badge is a metallic disk on a deeper background — material moves from rope and bronze (early) through silver, gold, and copper (mid) into sage, forest, and finally midnight (top). The dashed inner ring stays consistent. Days shown are streak thresholds.</p>
+
+    <div class="ladder" style="margin-top: var(--space-7);">
+      <div class="badge"><div class="badge-medal m-1"><span style="font-family: var(--font-display); font-style: italic; font-weight: 500; font-size: 26px;">1</span></div><div class="badge-tier">Tier 01</div><div class="badge-name">Kitchen Starter</div><div class="badge-days">Day 1</div></div>
+      <div class="badge"><div class="badge-medal m-2"><span style="font-family: var(--font-display); font-style: italic; font-weight: 500; font-size: 26px;">3</span></div><div class="badge-tier">Tier 02</div><div class="badge-name">Prep Cook</div><div class="badge-days">3 days</div></div>
+      <div class="badge"><div class="badge-medal m-3"><span style="font-family: var(--font-display); font-style: italic; font-weight: 500; font-size: 26px;">7</span></div><div class="badge-tier">Tier 03</div><div class="badge-name">Line Cook</div><div class="badge-days">7 days</div></div>
+      <div class="badge"><div class="badge-medal m-4"><span style="font-family: var(--font-display); font-style: italic; font-weight: 500; font-size: 26px;">14</span></div><div class="badge-tier">Tier 04</div><div class="badge-name">Sauté</div><div class="badge-days">14 days</div></div>
+      <div class="badge"><div class="badge-medal m-5"><span style="font-family: var(--font-display); font-style: italic; font-weight: 500; font-size: 26px;">30</span></div><div class="badge-tier">Tier 05</div><div class="badge-name">Sous Chef</div><div class="badge-days">30 days</div></div>
+      <div class="badge"><div class="badge-medal m-6"><span style="font-family: var(--font-display); font-style: italic; font-weight: 500; font-size: 26px;">60</span></div><div class="badge-tier">Tier 06</div><div class="badge-name">Head Chef</div><div class="badge-days">60 days</div></div>
+      <div class="badge"><div class="badge-medal m-7"><span style="font-family: var(--font-display); font-style: italic; font-weight: 500; font-size: 26px;">90</span></div><div class="badge-tier">Tier 07</div><div class="badge-name">Executive</div><div class="badge-days">90 days</div></div>
+      <div class="badge"><div class="badge-medal m-8"><span style="font-family: var(--font-display); font-style: italic; font-weight: 500; font-size: 26px;">150</span></div><div class="badge-tier">Tier 08</div><div class="badge-name">Master</div><div class="badge-days">150 days</div></div>
+      <div class="badge"><div class="badge-medal m-9"><span style="font-family: var(--font-display); font-style: italic; font-weight: 500; font-size: 26px;">210</span></div><div class="badge-tier">Tier 09</div><div class="badge-name">Legendary</div><div class="badge-days">210 days</div></div>
+      <div class="badge" style="border: 1.5px solid var(--sp-gold); background: linear-gradient(140deg, var(--sp-paper), #FFF6E5);">
+        <div class="badge-medal m-10"><span style="font-family: var(--font-display); font-style: italic; font-weight: 500; font-size: 24px; color: var(--sp-gold);">270</span></div>
+        <div class="badge-tier" style="color: var(--sp-gold);"><span class="pill-tag">SUPER</span></div>
+        <div class="badge-name">Super Legendary</div>
+        <div class="badge-days">270 days</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       10 — MOTION
+       ============================================================ -->
+  <section class="shell" id="motion">
+    <div class="section-meta">
+      <div class="section-num">10</div>
+      <div>
+        <h4 class="section-kicker">Motion</h4>
+        <h2>Movement that <em>cooks slowly.</em></h2>
+      </div>
+    </div>
+    <p class="lede">Sous Pantry doesn't bounce, slide, or flash. Motion eases gently in and decisively out — like a souffle rising, not a notification popping. Standard curve is a soft cubic-bezier; durations stay under 320ms unless something genuinely deserves more.</p>
+
+    <div class="motion-grid" style="margin-top: var(--space-7);">
+      <div class="motion-card">
+        <h4>Snap</h4>
+        <div class="motion-curve"><div class="motion-dot" style="animation-duration: 1.4s;"></div></div>
+        <p class="ts-body-sm" style="margin: 0;"><strong>120ms</strong> · ease-out<br>Taps, toggles, hovers.</p>
+      </div>
+      <div class="motion-card">
+        <h4>Standard</h4>
+        <div class="motion-curve"><div class="motion-dot" style="animation-duration: 1.8s;"></div></div>
+        <p class="ts-body-sm" style="margin: 0;"><strong>240ms</strong> · cubic-bezier(0.2, 0.8, 0.2, 1)<br>Sheets, tabs, transitions.</p>
+      </div>
+      <div class="motion-card">
+        <h4>Considered</h4>
+        <div class="motion-curve"><div class="motion-dot" style="animation-duration: 2.6s;"></div></div>
+        <p class="ts-body-sm" style="margin: 0;"><strong>320ms</strong> · ease-in-out<br>Modals, hero reveals.</p>
+      </div>
+      <div class="motion-card">
+        <h4>Celebration</h4>
+        <div class="motion-curve"><div class="motion-dot" style="animation-duration: 3.2s; background: var(--sp-gold);"></div></div>
+        <p class="ts-body-sm" style="margin: 0;"><strong>520ms</strong> + spring<br>Milestone unlock, streak save.</p>
+      </div>
+    </div>
+
+    <div class="canvas" style="margin-top: var(--space-5);">
+      <h4>Rules of Restraint</h4>
+      <p class="ts-body-sm">One animated thing at a time, ideally. Never animate text content (only its appearance). Always honour <code>prefers-reduced-motion</code>: drop durations to 0ms and skip springs. Save spring physics for milestone celebrations only — they're the loudest tool we have, so use them when it matters.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       11 — VOICE
+       ============================================================ -->
+  <section class="shell" id="voice">
+    <div class="section-meta">
+      <div class="section-num">11</div>
+      <div>
+        <h4 class="section-kicker">Voice &amp; Tone</h4>
+        <h2>Like a friend who <em>actually cooks.</em></h2>
+      </div>
+    </div>
+    <p class="lede">Warm. Direct. Occasionally a bit cheeky. We're not a wellness brand, we're not a productivity tool, and we're definitely not your grandmother's recipe blog. We talk like a confident home cook — no jargon, no hedging, no "synergy".</p>
+
+    <div class="grid-2" style="margin-top: var(--space-7);">
+      <div class="canvas">
+        <h4 style="color: var(--sp-forest);">Sounds like us</h4>
+        <p class="ts-body" style="margin-bottom: 8px;">"You've got 8 of 11 ingredients. Grab parsley and feta — dinner's sorted."</p>
+        <p class="ts-body" style="margin-bottom: 8px;">"Make it mine. Tweak this recipe and save your version."</p>
+        <p class="ts-body" style="margin-bottom: 8px;">"Streak saved. That feta was getting close."</p>
+        <p class="ts-body" style="margin: 0;">"Cherry tomatoes expire tomorrow. Here are 3 things to make tonight."</p>
+      </div>
+      <div class="canvas">
+        <h4 style="color: var(--sp-danger);">Doesn't sound like us</h4>
+        <p class="ts-body" style="margin-bottom: 8px; text-decoration: line-through; opacity: 0.6;">"Empower your culinary journey with AI-driven insights."</p>
+        <p class="ts-body" style="margin-bottom: 8px; text-decoration: line-through; opacity: 0.6;">"Oops! Looks like something went wrong 😅"</p>
+        <p class="ts-body" style="margin-bottom: 8px; text-decoration: line-through; opacity: 0.6;">"Unlock the power of premium meal planning today!"</p>
+        <p class="ts-body" style="margin: 0; text-decoration: line-through; opacity: 0.6;">"We hope you're having a great day! Just a friendly reminder…"</p>
+      </div>
+    </div>
+
+    <div class="grid-3" style="margin-top: var(--space-5);">
+      <div class="canvas">
+        <h4>Tone Spectrum</h4>
+        <p class="ts-body-sm">Empty states &amp; success: <strong>warm</strong>.<br>Errors &amp; expiry alerts: <strong>direct</strong>.<br>Paywall &amp; Pro CTAs: <strong>confident</strong>.<br>Educational tooltips: <strong>plain</strong>.</p>
+      </div>
+      <div class="canvas">
+        <h4>Australian English</h4>
+        <p class="ts-body-sm">Colour, flavour, organise. Capsicum not bell pepper. Coriander not cilantro. We say "chips" for hot, "crisps" only for British brands.</p>
+      </div>
+      <div class="canvas">
+        <h4>Don't be cute</h4>
+        <p class="ts-body-sm">No "Whoops!", no exclamation marks in errors, no emoji in body copy (light use in playful empty states only). Skip "Just" before verbs — it weakens us.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       12 — TOKENS / CODE
+       ============================================================ -->
+  <section class="shell" id="tokens">
+    <div class="section-meta">
+      <div class="section-num">12</div>
+      <div>
+        <h4 class="section-kicker">Code Tokens</h4>
+        <h2>Copy this, <em>ship faster.</em></h2>
+      </div>
+    </div>
+    <p class="lede">Drop these straight into your SwiftUI, Compose, or web codebases. Names match the design system 1:1, so a designer saying "use space-5 with shadow-2" maps directly to <code>SP.space5</code> / <code>SPSpacing.s5</code> / <code>--space-5</code>.</p>
+
+    <!-- SwiftUI -->
+    <h3 style="margin-top: var(--space-7); margin-bottom: var(--space-3); font-family: var(--font-display); font-weight: 400; font-size: 24px;">SwiftUI</h3>
+    <div>
+      <div class="code-tabs">
+        <button class="code-tab active">Theme.swift</button>
+      </div>
+      <pre class="code"><span class="c">// Sous Pantry — Theme.swift (actual implementation)</span>
+<span class="k">import</span> <span class="n">SwiftUI</span>
+
+<span class="k">enum</span> <span class="n">AppTheme</span> {
+    <span class="c">// MARK: - Colours</span>
+    <span class="k">static let</span> <span class="n">navy</span>      = <span class="n">Color</span>(<span class="n">red</span>: <span class="s">0.086</span>, <span class="n">green</span>: <span class="s">0.141</span>, <span class="n">blue</span>: <span class="s">0.216</span>)  <span class="c">// #162437</span>
+    <span class="k">static let</span> <span class="n">green</span>     = <span class="n">Color</span>(<span class="n">red</span>: <span class="s">0.176</span>, <span class="n">green</span>: <span class="s">0.353</span>, <span class="n">blue</span>: <span class="s">0.239</span>)  <span class="c">// #2D5A3D</span>
+    <span class="k">static let</span> <span class="n">cream</span>     = <span class="n">Color</span>(<span class="n">red</span>: <span class="s">0.969</span>, <span class="n">green</span>: <span class="s">0.953</span>, <span class="n">blue</span>: <span class="s">0.925</span>)  <span class="c">// #F7F3EC</span>
+    <span class="k">static let</span> <span class="n">softMint</span>  = <span class="n">Color</span>(<span class="n">red</span>: <span class="s">0.890</span>, <span class="n">green</span>: <span class="s">0.929</span>, <span class="n">blue</span>: <span class="s">0.902</span>)  <span class="c">// #E3EDE6</span>
+    <span class="k">static let</span> <span class="n">gold</span>      = <span class="n">Color</span>(<span class="n">red</span>: <span class="s">0.769</span>, <span class="n">green</span>: <span class="s">0.588</span>, <span class="n">blue</span>: <span class="s">0.353</span>)  <span class="c">// #C4965A</span>
+    <span class="k">static let</span> <span class="n">slate</span>     = <span class="n">Color</span>(<span class="n">red</span>: <span class="s">0.392</span>, <span class="n">green</span>: <span class="s">0.439</span>, <span class="n">blue</span>: <span class="s">0.502</span>)  <span class="c">// #647080</span>
+
+    <span class="c">// MARK: - Gradients</span>
+    <span class="k">static let</span> <span class="n">navyGradient</span> = <span class="n">LinearGradient</span>(
+        <span class="n">colors</span>: [<span class="n">navy</span>, <span class="n">Color</span>(<span class="n">red</span>: <span class="s">0.118</span>, <span class="n">green</span>: <span class="s">0.196</span>, <span class="n">blue</span>: <span class="s">0.298</span>)],
+        <span class="n">startPoint</span>: .<span class="n">topLeading</span>, <span class="n">endPoint</span>: .<span class="n">bottomTrailing</span>
+    )
+    <span class="k">static let</span> <span class="n">greenGradient</span> = <span class="n">LinearGradient</span>(
+        <span class="n">colors</span>: [<span class="n">green</span>, <span class="n">Color</span>(<span class="n">red</span>: <span class="s">0.224</span>, <span class="n">green</span>: <span class="s">0.435</span>, <span class="n">blue</span>: <span class="s">0.298</span>)],
+        <span class="n">startPoint</span>: .<span class="n">topLeading</span>, <span class="n">endPoint</span>: .<span class="n">bottomTrailing</span>
+    )
+}
+
+<span class="c">// MARK: - View helpers</span>
+<span class="k">extension</span> <span class="n">View</span> {
+    <span class="k">func</span> <span class="n">soCard</span>(<span class="n">padding</span>: <span class="n">CGFloat</span> = <span class="s">16</span>) -&gt; <span class="k">some</span> <span class="n">View</span> {
+        <span class="k">self</span>
+            .<span class="n">padding</span>(<span class="n">padding</span>)
+            .<span class="n">background</span>(<span class="n">Color</span>(.<span class="n">systemBackground</span>), <span class="n">in</span>: <span class="n">RoundedRectangle</span>(<span class="n">cornerRadius</span>: <span class="s">14</span>))
+            .<span class="n">shadow</span>(<span class="n">color</span>: <span class="n">AppTheme</span>.<span class="n">navy</span>.<span class="n">opacity</span>(<span class="s">0.07</span>), <span class="n">radius</span>: <span class="s">8</span>, <span class="n">x</span>: <span class="s">0</span>, <span class="n">y</span>: <span class="s">2</span>)
+    }
+
+    <span class="k">func</span> <span class="n">sectionLabel</span>(<span class="n">_</span> <span class="n">text</span>: <span class="n">String</span>) -&gt; <span class="k">some</span> <span class="n">View</span> {
+        <span class="n">VStack</span>(<span class="n">alignment</span>: .<span class="n">leading</span>, <span class="n">spacing</span>: <span class="s">12</span>) {
+            <span class="n">Text</span>(<span class="n">text</span>)
+                .<span class="n">font</span>(.<span class="n">caption</span>.<span class="n">weight</span>(.<span class="n">semibold</span>))
+                .<span class="n">tracking</span>(<span class="s">1.2</span>)
+                .<span class="n">foregroundStyle</span>(<span class="n">AppTheme</span>.<span class="n">slate</span>)
+                .<span class="n">textCase</span>(.<span class="n">uppercase</span>)
+            <span class="k">self</span>
+        }
+    }
+}
+
+<span class="c">// Note: iOS app uses SF Pro (system font) throughout UI.</span>
+<span class="c">// Fraunces + Outfit are used for marketing/web surfaces only.</span>
+
+<span class="c">// Usage</span>
+<span class="n">Text</span>(<span class="s">"Tonight's pantry suggestions"</span>)
+    .<span class="n">font</span>(.<span class="n">title2</span>.<span class="n">weight</span>(.<span class="n">semibold</span>))
+    .<span class="n">foregroundStyle</span>(<span class="n">AppTheme</span>.<span class="n">navy</span>)
+    .<span class="n">padding</span>(.<span class="n">horizontal</span>, <span class="s">24</span>)
+
+<span class="n">Button</span>(<span class="s">"Add to pantry"</span>) { }
+    .<span class="n">font</span>(.<span class="n">subheadline</span>.<span class="n">weight</span>(.<span class="n">semibold</span>))
+    .<span class="n">foregroundStyle</span>(.<span class="n">white</span>)
+    .<span class="n">frame</span>(<span class="n">maxWidth</span>: .<span class="n">infinity</span>)
+    .<span class="n">padding</span>(.<span class="n">vertical</span>, <span class="s">16</span>)
+    .<span class="n">background</span>(<span class="n">AppTheme</span>.<span class="n">green</span>, <span class="n">in</span>: <span class="n">RoundedRectangle</span>(<span class="n">cornerRadius</span>: <span class="s">14</span>))</pre>
+    </div>
+
+    <!-- CSS -->
+    <h3 style="margin-top: var(--space-7); margin-bottom: var(--space-3); font-family: var(--font-display); font-weight: 400; font-size: 24px;">CSS Variables (web &amp; marketing)</h3>
+    <div>
+      <div class="code-tabs">
+        <button class="code-tab active">tokens.css</button>
+      </div>
+      <pre class="code"><span class="n">:root</span> {
+  <span class="c">/* Brand */</span>
+  <span class="k">--sp-beige</span>:        <span class="s">#EDE9DF</span>;
+  <span class="k">--sp-cream</span>:        <span class="s">#F7F3EC</span>;
+  <span class="k">--sp-paper</span>:        <span class="s">#FFFDF8</span>;
+  <span class="k">--sp-navy</span>:         <span class="s">#162437</span>;
+  <span class="k">--sp-navy-deep</span>:    <span class="s">#0F1A26</span>;
+  <span class="k">--sp-forest</span>:       <span class="s">#2D5A3D</span>;
+  <span class="k">--sp-soft-mint</span>:    <span class="s">#E3EDE6</span>;
+  <span class="k">--sp-sage</span>:         <span class="s">#8FA68E</span>;
+  <span class="k">--sp-gold</span>:         <span class="s">#C4965A</span>;
+  <span class="k">--sp-slate</span>:        <span class="s">#647080</span>;
+
+  <span class="c">/* Type */</span>
+  <span class="k">--font-display</span>: <span class="s">'Fraunces', serif</span>;
+  <span class="k">--font-ui</span>:      <span class="s">'Outfit', sans-serif</span>;
+
+  <span class="c">/* Spacing */</span>
+  <span class="k">--space-1</span>: <span class="s">4px</span>;   <span class="k">--space-2</span>: <span class="s">8px</span>;
+  <span class="k">--space-3</span>: <span class="s">12px</span>;  <span class="k">--space-4</span>: <span class="s">16px</span>;
+  <span class="k">--space-5</span>: <span class="s">24px</span>;  <span class="k">--space-6</span>: <span class="s">32px</span>;
+  <span class="k">--space-7</span>: <span class="s">48px</span>;  <span class="k">--space-8</span>: <span class="s">64px</span>;
+
+  <span class="c">/* Radius */</span>
+  <span class="k">--r-sm</span>: <span class="s">8px</span>;   <span class="k">--r-md</span>: <span class="s">12px</span>;
+  <span class="k">--r-lg</span>: <span class="s">16px</span>;  <span class="k">--r-xl</span>: <span class="s">24px</span>;
+  <span class="k">--r-pill</span>: <span class="s">999px</span>;
+
+  <span class="c">/* Elevation */</span>
+  <span class="k">--shadow-1</span>: <span class="s">0 1px 2px rgba(22,36,55,.05), 0 1px 1px rgba(22,36,55,.04)</span>;
+  <span class="k">--shadow-2</span>: <span class="s">0 4px 12px rgba(22,36,55,.06), 0 2px 4px rgba(22,36,55,.04)</span>;
+  <span class="k">--shadow-3</span>: <span class="s">0 12px 32px rgba(22,36,55,.10), 0 4px 8px rgba(22,36,55,.05)</span>;
+  <span class="k">--shadow-4</span>: <span class="s">0 24px 64px rgba(22,36,55,.16), 0 8px 16px rgba(22,36,55,.06)</span>;
+}</pre>
+    </div>
+
+    <!-- Compose -->
+    <h3 style="margin-top: var(--space-7); margin-bottom: var(--space-3); font-family: var(--font-display); font-weight: 400; font-size: 24px;">Jetpack Compose (planned)</h3>
+    <p class="ts-body-sm" style="color: var(--sp-ink-3); font-style: italic;">Android support is planned. Tokens below are provisional and will be confirmed at implementation.</p>
+    <div>
+      <div class="code-tabs">
+        <button class="code-tab active">SousPantryTheme.kt</button>
+      </div>
+      <pre class="code"><span class="k">package</span> <span class="n">app.souspantry.ui.theme</span>
+
+<span class="k">import</span> <span class="n">androidx.compose.ui.graphics.Color</span>
+<span class="k">import</span> <span class="n">androidx.compose.ui.unit.dp</span>
+<span class="k">import</span> <span class="n">androidx.compose.ui.unit.sp</span>
+
+<span class="k">object</span> <span class="n">SPColor</span> {
+    <span class="k">val</span> <span class="n">Beige</span>      = <span class="n">Color</span>(<span class="s">0xFFEDE9DF</span>)
+    <span class="k">val</span> <span class="n">Cream</span>      = <span class="n">Color</span>(<span class="s">0xFFF7F3EC</span>)
+    <span class="k">val</span> <span class="n">Paper</span>      = <span class="n">Color</span>(<span class="s">0xFFFFFDF8</span>)
+    <span class="k">val</span> <span class="n">Navy</span>       = <span class="n">Color</span>(<span class="s">0xFF162437</span>)
+    <span class="k">val</span> <span class="n">NavyDeep</span>   = <span class="n">Color</span>(<span class="s">0xFF0F1A26</span>)
+    <span class="k">val</span> <span class="n">Forest</span>     = <span class="n">Color</span>(<span class="s">0xFF2D5A3D</span>)
+    <span class="k">val</span> <span class="n">SoftMint</span>   = <span class="n">Color</span>(<span class="s">0xFFE3EDE6</span>)
+    <span class="k">val</span> <span class="n">Sage</span>       = <span class="n">Color</span>(<span class="s">0xFF8FA68E</span>)
+    <span class="k">val</span> <span class="n">Gold</span>       = <span class="n">Color</span>(<span class="s">0xFFC4965A</span>)
+    <span class="k">val</span> <span class="n">Slate</span>      = <span class="n">Color</span>(<span class="s">0xFF647080</span>)
+    <span class="k">val</span> <span class="n">Ink3</span>       = <span class="n">Color</span>(<span class="s">0xFF7B8794</span>)
+}
+
+<span class="k">object</span> <span class="n">SPSpace</span> {
+    <span class="k">val</span> s1 = <span class="s">4</span>.<span class="n">dp</span>;  <span class="k">val</span> s2 = <span class="s">8</span>.<span class="n">dp</span>
+    <span class="k">val</span> s3 = <span class="s">12</span>.<span class="n">dp</span>; <span class="k">val</span> s4 = <span class="s">16</span>.<span class="n">dp</span>
+    <span class="k">val</span> s5 = <span class="s">24</span>.<span class="n">dp</span>; <span class="k">val</span> s6 = <span class="s">32</span>.<span class="n">dp</span>
+    <span class="k">val</span> s7 = <span class="s">48</span>.<span class="n">dp</span>; <span class="k">val</span> s8 = <span class="s">64</span>.<span class="n">dp</span>
+}
+
+<span class="k">object</span> <span class="n">SPRadius</span> {
+    <span class="k">val</span> sm = <span class="s">8</span>.<span class="n">dp</span>;   <span class="k">val</span> md = <span class="s">12</span>.<span class="n">dp</span>
+    <span class="k">val</span> lg = <span class="s">16</span>.<span class="n">dp</span>;  <span class="k">val</span> xl = <span class="s">24</span>.<span class="n">dp</span>
+    <span class="k">val</span> pill = <span class="s">999</span>.<span class="n">dp</span>
+}</pre>
+    </div>
+
+    <!-- Figma vars -->
+    <div class="canvas" style="margin-top: var(--space-6);">
+      <h4>Figma Variables</h4>
+      <p class="ts-body-sm">Mirror the same names in Figma's variable system: <code>color/sp/beige</code>, <code>space/sp/s5</code>, <code>radius/sp/lg</code>. Match these 1:1 to make handoff trivial. Set Beige as the default page background in your file styles so designs always match production.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="shell">
+    <div class="mark"><span class="mark-glyph">S</span><span>Sous Pantry</span></div>
+    <div>Design System v1.1 — Maintained by James, Solo Studio</div>
+    <div>May 2026 · Made with care in Australia</div>
+  </footer>
+
+</main>
+</body>
+</html>
