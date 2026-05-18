@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sous Pantry — Cook smarter, waste less</title>
-  <meta name="description" content="Sous Pantry turns your fridge and pantry into personalised recipes. Zero waste. Zero stress. Join the waitlist." />
+  <title>Sous Pantry is your AI Pantry and Sous Chef partner — built to manage your pantry, cut food waste and answer "what's for dinner?" in seconds.</title>
+  <meta name="description" content="Sous Pantry turns your fridge and pantry into personalised recipes. Zero waste. Zero stress. Download on iOS app." />
   <link rel="icon" type="image/png" href="icon.png" />
   <link rel="apple-touch-icon" href="icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -51,7 +51,7 @@
       text-decoration: none;
     }
     .nav-logo-icon {
-      width: 34px; height: 34px; border-radius: 10px;
+      width: 80px; height: 100%;
       overflow: hidden;
       display: flex; align-items: center; justify-content: center;
     }
@@ -67,20 +67,46 @@
       transition: opacity .15s;
     }
     .nav-cta:hover { opacity: .85; }
+    /* Badge in nav: no bottom margin (only used in hero) */
+    .nav-badge { margin-bottom: 0; }
+
+    /* Divider between Hero and Problem sections */
+    .section-divider {
+      border: none;
+      height: 1px;
+      background: rgba(22,36,56,.12);
+      max-width: 1060px;
+      margin: 0 auto;
+    }
 
     /* ── HERO ────────────────────────────────────────── */
     .hero {
+      background: var(--navy);
       text-align: center;
-      padding: 80px 24px 72px;
-      max-width: 780px; margin: 0 auto;
+      padding: 96px 24px 104px;
     }
+    .hero .section-title {
+      color: #fff;
+      max-width: 780px;
+      margin: 0 auto 36px;
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 600;
+      letter-spacing: -.4px;
+      line-height: 1.4;
+    }
+    .hero h1 { color: #fff; }
+    .hero h1 em { color: var(--green-light); }
+    .hero .hero-sub { color: rgba(255,255,255,.8); }
+    .hero .appstore-note { color: rgba(255,255,255,.7); }
+    .hero .appstore-btn { margin-top: 16px; }
     .badge {
       display: inline-flex; align-items: center; gap: 6px;
       background: var(--green-light);
       color: var(--green);
       font-size: 13px; font-weight: 600;
       padding: 6px 14px; border-radius: 100px;
-      margin-bottom: 28px;
+      
     }
     .badge-dot {
       width: 7px; height: 7px; border-radius: 50%;
@@ -148,6 +174,48 @@
       padding: 14px 24px; border-radius: 100px;
       margin: 0 auto;
       max-width: 460px; text-align: center;
+    }
+
+    /* ── APP STORE BADGE ─────────────────────────────── */
+    .appstore-btn {
+      display: inline-block;
+      line-height: 0;
+      text-decoration: none;
+      transition: opacity .15s, transform .1s;
+    }
+    .appstore-btn:hover { opacity: .85; }
+    .appstore-btn:active { transform: scale(.97); }
+    .appstore-btn img {
+      height: 56px;
+      width: auto;
+      display: block;
+    }
+    @media (max-width: 520px) {
+      .appstore-btn img { height: 48px; }
+    }
+    .appstore-note {
+      font-size: 13.5px; color: var(--navy70);
+      margin-top: 16px; text-align: center;
+    }
+    .cta-section .appstore-note { color: rgba(255,255,255,.75); }
+
+    /* ── FAQ ───────────────────────────────────────── */
+    .faq-section { padding: 80px 24px; background: var(--cream2); }
+    .faq-list { margin-top: 40px; max-width: 720px; }
+    .faq-item {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      margin-bottom: 12px;
+      border: 1px solid rgba(22,36,56,.07);
+    }
+    .faq-item h3 {
+      font-size: 16px; font-weight: 700;
+      color: var(--navy); margin-bottom: 8px;
+    }
+    .faq-item p {
+      font-size: 14.5px; color: var(--navy70);
+      line-height: 1.65;
     }
 
     /* ── PROBLEM ─────────────────────────────────────── */
@@ -277,21 +345,86 @@
       color: var(--navy70);
     }
 
+    /* ── HERO BANNER ─────────────────────────────────── */
+    .hero-banner {
+      width: 100%;
+      background: var(--cream);
+      padding: 0;
+      display: flex; justify-content: center;
+    }
+    .hero-banner-inner {
+      width: 100%; max-width: 1200px;
+      position: relative;
+    }
+    .hero-banner-inner img {
+      width: 100%;
+      /* max-height: 80vh; */
+      height: auto;
+      display: block;
+      /* border-radius: var(--radius); */
+      object-fit: contain;
+    }
+    .hero-banner-cta {
+      position: absolute;
+      left: 50%;
+      top: 72%;
+      
+      transform: translate(0%, 0%);
+      z-index: 2;
+    }
+    .hero-banner-cta img { height: 56px; width: auto; display: block; }
+    @media (max-width: 760px) {
+      .hero-banner-cta img { height: 44px; }
+    }
+    @media (max-width: 480px) {
+      .hero-banner-cta img { height: 36px; }
+    }
+
     /* ── FINAL CTA ───────────────────────────────────── */
     .cta-section {
-      background: var(--green);
-      padding: 88px 24px;
-      text-align: center;
+      background: #2D5A3D;
+      padding: 0;
+      text-align: left;
+    }
+    .cta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      max-width: 1280px;
+      margin: 0 auto;
+      gap: 0;
+      min-height: 540px;
+    }
+    .cta-image {
+      width: 100%;
+      height: 100%;
+      min-height: 540px;
+      background-size: cover;
+      background-position: center;
+    }
+    .cta-content {
+      padding: 64px 56px;
     }
     .cta-section h2 {
-      font-size: clamp(28px, 4.5vw, 46px);
-      font-weight: 900; letter-spacing: -1px;
-      color: #fff; margin-bottom: 16px;
-      line-height: 1.15;
+      font-size: clamp(26px, 3.2vw, 40px);
+      font-weight: 800; letter-spacing: -.6px;
+      color: #fff; margin-bottom: 20px;
+      line-height: 1.2;
     }
     .cta-section p {
-      font-size: 17px; color: rgba(255,255,255,.8);
-      margin-bottom: 40px; line-height: 1.6;
+      font-size: 15px; color: rgba(255,255,255,.85);
+      margin-bottom: 32px; line-height: 1.65;
+      max-width: 480px;
+    }
+    .cta-content .appstore-btn { margin-left: 0; }
+    .cta-content .appstore-note { text-align: left; }
+
+    @media (max-width: 860px) {
+      .cta-grid { grid-template-columns: 1fr; min-height: auto; }
+      .cta-image { min-height: 320px; }
+      .cta-content { padding: 48px 24px; text-align: center; }
+      .cta-section p { margin-left: auto; margin-right: auto; }
+      .cta-content .appstore-note { text-align: center; }
     }
     .cta-section .waitlist-form input[type="email"] {
       border-color: rgba(255,255,255,.3);
@@ -358,29 +491,37 @@
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="#">
-    <div class="nav-logo-icon"><img src="icon.png" alt="Sous Pantry" /></div>
-    Sous Pantry
+    <div class="nav-logo-icon"><img src="SousPantry-logo.png" alt="Sous Pantry" /></div>
   </a>
-  <a class="nav-cta" href="#waitlist">Join waitlist</a>
+  <div class="badge nav-badge">
+    <span class="badge-dot"></span>
+    Now live on the App Store
+  </div>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="badge">
-    <span class="badge-dot"></span>
-    Now accepting early access
-  </div>
-  <h1>Your pantry. Your meals. <br /><em>Your way</em>.</h1>
-  <p class="hero-sub">Sous Pantry helps you track what's in your pantry and turn what you have into meals.</p>
 
-  <form class="waitlist-form" id="hero-form" onsubmit="handleSubmit(event, 'hero')">
-    <input type="text"  name="first_name" placeholder="First name" required />
-    <input type="email" name="email"      placeholder="Email address" required />
-    <button type="submit">Join the waitlist →</button>
-  </form>
-  <div class="success-msg" id="hero-success">🎉 You're on the list! We'll be in touch soon.</div>
-  <p class="form-note">Free to join · No spam · Be first to know</p>
+<!-- Hero Banner-->
+<section class="hero-banner">
+  <div class="hero-banner-inner">
+    <img src="SousPantry-Banner-type2.png" alt="Sous Pantry" />
+    <!-- <a href="https://apps.apple.com/app/sous-pantry/id0000000000" class="hero-banner-cta appstore-btn" target="_blank" rel="noopener">
+      <img src="appstore-badge.svg" alt="Download on the App Store" />
+    </a>-->
+  </div>
 </section>
+
+<!-- Hero Section--> 
+<section class="hero">
+  <h1>Your pantry. Your meals. <br><em>Your way</em>.</h1>
+  <p class="hero-sub">Sous Pantry helps you track what's in your pantry and turn what you have into meals.</p>
+  <a href="https://apps.apple.com/app/sous-pantry/id0000000000" class="appstore-btn" target="_blank" rel="noopener">
+    <img src="appstore-badge.svg" alt="Download on the App Store" />
+  </a>
+  <!-- <p class="appstore-note">First 50 reviewers get one free month of Pro 🌿</p>-->
+</section>
+
+<hr class="section-divider" />
 
 <!-- PROBLEM -->
 <section class="section">
@@ -493,7 +634,7 @@
   </div>
 </section>
 
-<!-- SOCIAL PROOF -->
+<!-- SOCIAL PROOF 
 <section class="quotes-section">
   <div class="section-inner">
     <p class="section-label">Early testers say</p>
@@ -511,29 +652,73 @@
         <p class="quote-author">JT. — Melbourne</p>
       </div>
       <div class="quote-card">
-        <div class="stars">★★★★★</div>
+        <div class="stars">★★★★★</div>2
         <p class="quote-text">"Finally an app that knows what I have in my pantry and gives me something genuinely useful. No more stress at the supermarket."</p>
         <p class="quote-author">PK. — Sydney</p>
       </div>
     </div>
   </div>
-</section>
+</section>-->
 
 <!-- FINAL CTA -->
-<section class="cta-section" id="waitlist">
-  <div class="section-inner" style="max-width:640px">
-    <h2>Be first in the kitchen.</h2>
-    <p>Join home cooks already on the waitlist.<br>First 50 early access members get Pro free for a month.</p>
+<section class="cta-section" id="download">
+  <div class="cta-grid">
+    <div class="cta-image" style="background-image: url('ashe-walker-dUIm77Dc4jc-unsplash 1.png');"></div>
+    <div class="cta-content">
+      <h2>Tell us what's in your pantry.</h2>
+      <h2 style="font-weight: 100; font-size: 40px;">We'll tell you <br />what's for dinner.</h2>
+      <!-- <p>Download Sous Pantry and turn your pantry into your next favourite meal. First 50 reviewers get Pro free for a month.</p>
 
-    <form class="waitlist-form" id="cta-form" onsubmit="handleSubmit(event, 'cta')" style="justify-content:center">
-      <input type="text"  name="first_name" placeholder="First name" required />
-      <input type="email" name="email"      placeholder="Email address" required />
-      <button type="submit">Reserve my spot →</button>
-    </form>
-    <div class="success-msg" id="cta-success">🎉 You're on the list! We'll be in touch soon.</div>
-    <p class="form-note">Free to join · No spam · Be first to know</p>
+      <a href="https://apps.apple.com/app/sous-pantry/id0000000000" class="appstore-btn" target="_blank" rel="noopener">
+        <img src="appstore-badge.svg" alt="Download on the App Store" />
+      </a>
+      <p class="appstore-note">Free download. Cancel anytime.</p>-->
+    </div>
   </div>
 </section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="section-inner">
+    <p class="section-label">FAQs</p>
+    <h2 class="section-title">Questions, answered.</h2>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <h3>Is Sous Pantry free?</h3>
+        <p>Yes — Sous Pantry is free to download and use, with an optional Pro plan for advanced features like AI weekly meal plans and Saved Recipes.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Does my pantry data stay private?</h3>
+        <p>Yes. Your pantry and recipe data is yours alone — we never sell or share it with third parties.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How does the AI work?</h3>
+        <p>Sous Pantry's AI looks at what you have in your pantry, your dietary preferences, and suggests personalised meals you can actually cook tonight.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How do I cancel Pro?</h3>
+        <p>You can cancel anytime through your Apple App Store subscription settings. Your Pro access continues until the end of the billing period.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero">
+  <h2 class="section-title">Ready for Sous Pantry helps you track what's in your pantry and turn what you have into meals.</h2>
+  <a href="https://apps.apple.com/app/sous-pantry/id0000000000" class="appstore-btn" target="_blank" rel="noopener">
+    <img src="appstore-badge.svg" alt="Download on the App Store" />
+  </a>
+  <!-- <p class="appstore-note">First 50 reviewers get one free month of Pro 🌿</p>-->
+</section>
+
+<!-- Hero Banner--> 
+<section class="hero-banner">
+  <div class="hero-banner-inner">
+    <img src="Header-Banner.png" alt="Sous Pantry" />
+  </div>
+</section>
+
 
 <!-- FOOTER -->
 <footer>
@@ -543,6 +728,8 @@
     <a href="https://hw.qld.gov.au/blog/ditch-the-takeaway-how-to-eat-cheaper-and-healthier-at-home/" target="_blank" rel="noopener">QLD Health & Wellbeing</a>
   </p>
 </footer>
+
+
 
 <script>
   const FORMSPREE = 'https://formspree.io/f/mqewyboa';
